@@ -2,7 +2,7 @@ install:
 	npm ci
 
 start-server:
-	npx start-server
+	npx start-server -s ./frontend/build
 
 lint:
 	make -C frontend lint
