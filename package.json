@@ -1,0 +1,22 @@
+{
+  "name": "frontend-project-12",
+  "version": "1.0.0",
+  "description": "Chat (Slack)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vox1oot/frontend-project-12.git"
+  },
+  "author": "Morzhov Vitaliy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vox1oot/frontend-project-12/issues"
+  },
+  "homepage": "https://github.com/Vox1oot/frontend-project-12#readme",
+  "dependencies": {
+    "@hexlet/chat-server": "^1.1.6"
+  }
+}
