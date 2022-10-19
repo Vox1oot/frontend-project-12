@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
-    <div className="d-flex flex-column h-100">
       <div className="text-center">
         <img
           alt="Страница не найдена"
@@ -12,7 +11,6 @@ const NotFoundPage = () => {
         <h1 className="h4 text-muted">Страница не найдена</h1>
         <p className="text-muted">Но вы можете перейти <Link to="/">на главную страницу</Link></p>
       </div>
-    </div>
   );
 };
 
