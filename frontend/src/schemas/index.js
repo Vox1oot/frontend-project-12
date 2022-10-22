@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
-let schema = yup.object().shape({
-  username: yup.string().required(),
-  password: yup.string().required(),
+const schema = yup.object().shape({
+  username: yup.string().required('Пожалуйста, заполните это поле'),
+  password: yup.string().required('Пожалуйста, заполните это поле'),
 });
 
 export default schema;
