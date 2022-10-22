@@ -1,5 +1,11 @@
 import { useFormik } from 'formik';
 import schema from '../schemas/index.js';
+import axios from 'axios';
+
+const loginUser = async (username, password) => {
+  const data = await axios.post('/api/v1/login', { username , password });
+  console.log(data);
+}
 
 const Login = () => {
   const formik = useFormik({
@@ -8,6 +14,9 @@ const Login = () => {
       password: '',
     },
     validationSchema: schema,
+    onSubmit: ({ username, password }) => {
+      loginUser(username, password);
+    }
   });
 
   return (

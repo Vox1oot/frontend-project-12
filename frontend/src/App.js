@@ -1,31 +1,50 @@
 import { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
+import AuthContext from './context/index.jsx';
+//import useAuth from './hooks/index.jsx';
 
 import Nav from './components/Nav';
 
-
-const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  console.log(token);
-  {/* if (!token) {
-    return <Login setToken={setToken} />
-  } */}
+const AuthProvider = ({ children }) => {
+  const [userData, setUserData] = useState({});
 
   return (
-    <>
+    <AuthContext.Provider value={{ userData, setUserData }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  console.log(token);
+
+  return token ? children : <Navigate to="/login" />;
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
       <Nav />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Chat />} />
-          <Route path="/login" element={<Login setToken={setToken}/>} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Chat />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 };
 
