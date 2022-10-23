@@ -22,6 +22,7 @@ const Login = () => {
 
         if (data.token) {
           localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.username);
           const setContextUserData = auth.setUserData;
           setContextUserData(data);
 

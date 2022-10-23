@@ -5,11 +5,14 @@ import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
 import AuthContext from './context/index.jsx';
-
+import useAuth from './hooks/index.jsx';
 import Nav from './components/Nav';
 
 const AuthProvider = ({ children }) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({ 
+    token: localStorage.getItem('token'), 
+    username: localStorage.getItem('username') 
+  });
 
   return (
     <AuthContext.Provider value={{ userData, setUserData }}>
@@ -19,7 +22,9 @@ const AuthProvider = ({ children }) => {
 };
 
 const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const auth = useAuth();
+
+  const token = auth.userData.token;
   return token ? children : <Navigate to="/login" />;
 };
 
