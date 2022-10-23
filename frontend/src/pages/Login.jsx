@@ -1,33 +1,39 @@
 import { useFormik } from 'formik';
 import schema from '../schemas/index.js';
 import axios from 'axios';
-
-const onSubmit = async ({ username, password }, actions) => {
-  //console.log(values),
-  //console.log(actions);
-
-  try {
-    const data = await axios.post('/api/v1/login', { username, password });
-    console.log(data);
-  } catch (error) {
-    if (error.response.status === 401) {
-      actions.resetForm();
-      actions.setErrors({ authError: 'Неверное имя пользователя или пароль' });
-    }
-  }
-};
+import { useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+//import useAuth from '../hooks/index.jsx';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const inputUserName = useRef(null);
+
   const { values, handleChange, handleSubmit, errors, isSubmitting } = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     validationSchema: schema,
-    onSubmit,
+    onSubmit: async ({ username, password }, actions) => {
+      try {
+        const { data } = await axios.post('/api/v1/login', { username, password });
+
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          navigate('/');
+        }
+      } catch (error) {
+        if (error.response.status === 401) {
+          actions.setFieldError("authentication", "Неверное имя пользователя и/или пароль!");
+        }
+      }
+    }
   });
 
-  console.log(errors);
+  useEffect(() => {
+    inputUserName.current.focus();
+  },[errors.authentication]);
 
   return (
     <div className="container-fluid h-100">
@@ -49,23 +55,17 @@ const Login = () => {
                 <h1 className="text-center mb-4">Войти</h1>
                 <div className="form-floating mb-3">
                   <input
+                    ref={inputUserName}
                     type="text"
                     name="username"
                     required
                     placeholder="Ваш ник"
                     id="username"
-                    className={
-                      errors.username
-                        ? 'form-control is-invalid'
-                        : 'form-control'
-                    }
+                    className={ errors.authentication ? 'form-control is-invalid' : 'form-control' }
                     value={values.username}
                     onChange={handleChange}
                   />
                   <label htmlFor="username">Ваш ник</label>
-                  {errors.username ? (
-                    <div className="invalid-tooltip">{errors.username}</div>
-                  ) : null }
                 </div>
                 <div className="form-floating mb-4">
                   <input
@@ -75,18 +75,12 @@ const Login = () => {
                     required
                     placeholder="Пароль"
                     id="password"
-                    className={
-                      errors.password
-                        ? 'form-control is-invalid'
-                        : 'form-control'
-                    }
+                    className={ errors.authentication ? 'form-control is-invalid' : 'form-control' }
                     value={values.password}
                     onChange={handleChange}
                   />
                   <label htmlFor="pasword">Пароль</label>
-                  {errors.password ? (
-                    <div className="invalid-tooltip">{errors.password}</div>
-                  ) : null }
+                  { errors.authentication && <div className="invalid-tooltip">{errors.authentication}</div>}
                 </div>
                 <button
                   type="submit"
