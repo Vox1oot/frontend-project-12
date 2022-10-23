@@ -5,7 +5,6 @@ import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
 import AuthContext from './context/index.jsx';
-//import useAuth from './hooks/index.jsx';
 
 import Nav from './components/Nav';
 

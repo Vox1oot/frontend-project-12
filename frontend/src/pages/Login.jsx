@@ -3,11 +3,12 @@ import schema from '../schemas/index.js';
 import axios from 'axios';
 import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import useAuth from '../hooks/index.jsx';
+import useAuth from '../hooks/index.jsx';
 
 const Login = () => {
   const navigate = useNavigate();
   const inputUserName = useRef(null);
+  const auth = useAuth();
 
   const { values, handleChange, handleSubmit, errors, isSubmitting } = useFormik({
     initialValues: {
@@ -21,6 +22,9 @@ const Login = () => {
 
         if (data.token) {
           localStorage.setItem('token', data.token);
+          const setContextUserData = auth.setUserData;
+          setContextUserData(data);
+
           navigate('/');
         }
       } catch (error) {
