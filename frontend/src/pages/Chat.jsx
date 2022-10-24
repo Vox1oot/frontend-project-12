@@ -1,21 +1,21 @@
+import { useEffect } from "react";
+import {useSelector, useDispatch } from "react-redux";
 import useAuth from '../hooks/index.jsx';
-import axios from 'axios';
-
-const getChannelsAndMessages = async (token) => {
-  const response = await axios.get('/api/v1/data', {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-
-  console.log(response.data);
-}
+import fetchAuthorizationData from '../redux/thunk.js';
 
 const Chat = () => {
+  const channels = useSelector((state) => state.channels);
+  const messages = useSelector((state) => state.messages);
+  const dispatch = useDispatch();
   const auth = useAuth();
-  const { token } = auth.userData;
-  getChannelsAndMessages(token);
 
+  useEffect(() => {
+    const { token } = auth.userData;
+    dispatch(fetchAuthorizationData(token))
+  }, [auth.userData, dispatch]);
+
+  console.log(channels);
+  console.log(messages);
   return (
     <div>
       Chat
