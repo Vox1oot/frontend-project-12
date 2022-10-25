@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import {useSelector, useDispatch } from "react-redux";
+import {/* useSelector */ useDispatch } from "react-redux";
 import useAuth from '../hooks/index.jsx';
 import fetchAuthorizationData from '../redux/thunk.js';
 
 import InputMessages from '../components/InputMessage';
+import Channels from "../components/Channels.jsx";
 
 const Chat = () => {
-  const { channels, /* currentChannelId */ } = useSelector((state) => state.channels);
+  //const { channels, currentChannelId } = useSelector((state) => state.channels);
   //const messages = useSelector((state) => state.messages);
   const dispatch = useDispatch();
   const auth = useAuth();
@@ -17,7 +18,7 @@ const Chat = () => {
   }, [auth.userData, dispatch]);
 
   //console.log(channels);
-  //onsole.log(messages);
+  //console.log(messages);
 
   return (
     <div className="container h-75 my-4 overflow-hidden rounded shadow">
@@ -31,14 +32,7 @@ const Chat = () => {
             </button>
           </div>
           <ul className="nav flex-column nav-pills nav-fill px-2">
-            {channels.map((channel) => (
-              <li key={channel.id} className="nav-item w-100">
-                <button className="w-100 rounded-0 text-start btn">
-                  <span className="me-1">#</span>
-                  {channel.name}
-                </button>
-              </li>
-            ))}
+            <Channels />
           </ul>
         </div>
         <div className="col p-0 h-100">
