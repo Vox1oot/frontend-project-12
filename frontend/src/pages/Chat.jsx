@@ -3,9 +3,11 @@ import {useSelector, useDispatch } from "react-redux";
 import useAuth from '../hooks/index.jsx';
 import fetchAuthorizationData from '../redux/thunk.js';
 
+import InputMessages from '../components/InputMessage';
+
 const Chat = () => {
   const channels = useSelector((state) => state.channels);
-  const messages = useSelector((state) => state.messages);
+  //const messages = useSelector((state) => state.messages);
   const dispatch = useDispatch();
   const auth = useAuth();
 
@@ -14,11 +16,11 @@ const Chat = () => {
     dispatch(fetchAuthorizationData(token))
   }, [auth.userData, dispatch]);
 
-  console.log(channels);
-  console.log(messages);
+  //console.log(channels);
+  //onsole.log(messages);
 
   return (
-    <div className="container h-100 my-4 overflow-hidden rounded shadow">
+    <div className="container h-75 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
@@ -49,7 +51,7 @@ const Chat = () => {
             </div>
             <div id="messages-box" className="chat-messages overflow-auto px-5 "></div>
             <div className="mt-auto px-5 py-3">
-              
+              <InputMessages />
             </div>
           </div>
         </div>
