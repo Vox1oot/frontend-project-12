@@ -3,11 +3,11 @@ import fetchAuthorizationData from '../thunk.js';
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: [],
+  initialState: { channels: [], currentChannelId: 0 },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      return payload.channels;
+      state.channels = payload.channels;
+      state.currentChannelId = payload.currentChannelId;
     })
   }
 });

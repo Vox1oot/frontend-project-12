@@ -6,7 +6,7 @@ import fetchAuthorizationData from '../redux/thunk.js';
 import InputMessages from '../components/InputMessage';
 
 const Chat = () => {
-  const channels = useSelector((state) => state.channels);
+  const { channels, /* currentChannelId */ } = useSelector((state) => state.channels);
   //const messages = useSelector((state) => state.messages);
   const dispatch = useDispatch();
   const auth = useAuth();
