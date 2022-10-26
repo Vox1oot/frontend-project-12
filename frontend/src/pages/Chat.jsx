@@ -6,6 +6,7 @@ import fetchAuthorizationData from '../redux/thunk.js';
 import InputMessages from '../components/InputMessage';
 import Channels from "../components/Channels.jsx";
 import ChatInfo from "../components/ChatInfo.jsx";
+import Messages from "../components/Messages.jsx";
 
 const Chat = () => {
   //const { channels, currentChannelId } = useSelector((state) => state.channels);
@@ -39,7 +40,9 @@ const Chat = () => {
         <div className="col p-0 h-100">
           <div className="d-flex flex-column h-100">
             <ChatInfo />
-            <div id="messages-box" className="chat-messages overflow-auto px-5 "></div>
+            <div id="messages-box" className="chat-messages overflow-auto px-5 ">
+              <Messages />
+            </div>
             <div className="mt-auto px-5 py-3">
               <InputMessages />
             </div>

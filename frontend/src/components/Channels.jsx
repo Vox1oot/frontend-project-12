@@ -26,6 +26,7 @@ const Channels = () => {
           action="true"
           active={currentChannelId == channel.id}
         >
+          <span># </span>
           {channel.name}
         </ListGroup.Item>
       ))}
