@@ -1,22 +1,20 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { changeChannel } from '../redux/slices/channelsSlice.js';
 
 const Channels = () => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
-  const [id, setID] = useState(null);
-
-  console.log(channels);
-  console.log(currentChannelId);
+  const dispatch = useDispatch();
 
   const handleActiveChannel = (e) => {
-    setID(Number(e.target.id));
+    dispatch(changeChannel(Number(e.target.id)));
   };
 
   useEffect(() => {
-    setID(currentChannelId);
-  }, [currentChannelId])
+    dispatch(changeChannel(currentChannelId));
+  }, [dispatch, currentChannelId]) // currentChannelId render twice 
 
   return (
     <ListGroup>
@@ -26,7 +24,7 @@ const Channels = () => {
           key={index}
           onClick={handleActiveChannel}
           action="true"
-          active={id == channel.id}
+          active={currentChannelId == channel.id}
         >
           {channel.name}
         </ListGroup.Item>
