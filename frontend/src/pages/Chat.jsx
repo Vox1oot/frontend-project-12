@@ -21,7 +21,7 @@ const Chat = () => {
   //console.log(messages);
 
   return (
-    <div className="container h-75 my-4 overflow-hidden rounded shadow">
+    <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
