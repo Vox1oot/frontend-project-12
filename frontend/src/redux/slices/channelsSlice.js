@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import fetchAuthorizationData from '../thunk.js';
 
 const channelsSlice = createSlice({
@@ -13,6 +13,7 @@ const channelsSlice = createSlice({
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
       state.channels = payload.channels;
       state.currentChannelId = payload.currentChannelId;
+      console.log(current(state));
     })
   }
 });

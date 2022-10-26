@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import {/* useSelector */ useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import useAuth from '../hooks/index.jsx';
 import fetchAuthorizationData from '../redux/thunk.js';
 
@@ -7,10 +7,14 @@ import InputMessages from '../components/InputMessage';
 import Channels from "../components/Channels.jsx";
 import ChatInfo from "../components/ChatInfo.jsx";
 import Messages from "../components/Messages.jsx";
+import { addMessage } from "../redux/slices/messagesSlice.js";
+
+import { io } from "socket.io-client";
+const socket = io("ws://localhost:3000");
+
+const username = localStorage.getItem('username'); // добавить в store ?
 
 const Chat = () => {
-  //const { channels, currentChannelId } = useSelector((state) => state.channels);
-  //const messages = useSelector((state) => state.messages);
   const dispatch = useDispatch();
   const auth = useAuth();
 
@@ -19,8 +23,9 @@ const Chat = () => {
     dispatch(fetchAuthorizationData(token))
   }, [auth.userData, dispatch]);
 
-  //console.log(channels);
-  //console.log(messages);
+  socket.on('newMessage', (payload) => {
+    dispatch(addMessage(payload));
+  })
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -44,7 +49,7 @@ const Chat = () => {
               <Messages />
             </div>
             <div className="mt-auto px-5 py-3">
-              <InputMessages />
+              <InputMessages socket={socket} username={username}/>
             </div>
           </div>
         </div>

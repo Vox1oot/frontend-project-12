@@ -1,13 +1,23 @@
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-const InputMessage = () => {
-  const [message, setMessage] = useState();
+const InputMessage = ({ socket, username }) => {
+  const [message, setMessage] = useState('');
+
+  const channelId = useSelector((state) => state.channels.currentChannelId);
 
   const input = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    socket.emit('newMessage', { 
+      body: message, 
+      channelId,
+      username,
+    });
+    
     setMessage('');
     input.current.focus();
   };

@@ -6,7 +6,8 @@ const Messages = () => {
   return (
     messages.map((message, index) => (
       <div className='text-break mb-2' key={index}>
-        {message}
+        <b>{`${message.username}: `}</b>
+        {message.body}
       </div>
     ))
   )
