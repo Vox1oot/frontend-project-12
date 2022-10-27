@@ -8,7 +8,7 @@ import store from './redux/index.js';
 
 const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(
-  <Provider store={store}>
+  <Provider store={store} >
     <App />
   </Provider>
 );
