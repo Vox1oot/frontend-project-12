@@ -4,33 +4,34 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
-import AuthContext from './context/index.jsx';
-import useAuth from './hooks/index.jsx';
 import Nav from './components/Nav';
 
-const AuthProvider = ({ children }) => {
+import Context from './context/index.jsx';
+import useAuthContext from './hooks/index.jsx';
+
+const MainProvider = ({ children }) => {
   const [userData, setUserData] = useState({ 
     token: localStorage.getItem('token'), 
-    username: localStorage.getItem('username') 
+    username: localStorage.getItem('username'),
   });
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <Context.Provider value={{ data: userData, setUserData }}>
       {children}
-    </AuthContext.Provider>
+    </Context.Provider>
   );
 };
 
 const PrivateRoute = ({ children }) => {
-  const auth = useAuth();
+  const authContext = useAuthContext();
 
-  const token = auth.userData.token;
+  const { token } = authContext.data;
   return token ? children : <Navigate to="/login" />;
 };
 
 const App = () => {
   return (
-    <AuthProvider>
+    <MainProvider>
       <Nav />
       <BrowserRouter>
         <Routes>
@@ -46,7 +47,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+    </MainProvider>
   );
 };
 

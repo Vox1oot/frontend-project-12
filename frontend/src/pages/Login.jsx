@@ -1,14 +1,15 @@
 import { useFormik } from 'formik';
-import schema from '../schemas/index.js';
 import axios from 'axios';
 import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/index.jsx';
+
+import schema from '../schemas/index.js';
+import useAuthContext from '../hooks/index.jsx';
 
 const Login = () => {
   const navigate = useNavigate();
   const inputUserName = useRef(null);
-  const auth = useAuth();
+  const useAuth = useAuthContext();
 
   const { values, handleChange, handleSubmit, errors, isSubmitting } = useFormik({
     initialValues: {
@@ -25,8 +26,7 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('username', data.username);
-          const setContextUserData = auth.setUserData;
-          setContextUserData(data);
+          useAuth.setUserData(data);
 
           navigate('/');
         }

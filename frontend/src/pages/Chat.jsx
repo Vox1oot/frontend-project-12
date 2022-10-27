@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import useAuth from '../hooks/index.jsx';
+import useAuthContext from '../hooks/index.jsx';
 import fetchAuthorizationData from '../redux/thunk.js';
 
 import InputMessages from '../components/InputMessage';
@@ -10,23 +10,19 @@ import Messages from "../components/Messages.jsx";
 import { addMessage } from "../redux/slices/messagesSlice.js";
 
 import { io } from "socket.io-client";
+
 const socket = io("ws://localhost:3000");
-
-const username = localStorage.getItem('username'); // добавить в store ?
-
-console.log(username);
 
 const Chat = () => {
   const dispatch = useDispatch();
-  const auth = useAuth();
+  const { data }= useAuthContext();
 
   useEffect(() => {
-    const { token } = auth.userData;
-    dispatch(fetchAuthorizationData(token))
-  }, [auth.userData, dispatch]);
+    const { token } = data;
+    dispatch(fetchAuthorizationData(token));
+  }, [data, dispatch]);
 
   socket.on('newMessage', (payload) => {
-    console.log(payload);
     dispatch(addMessage(payload));
   })
 
@@ -52,7 +48,7 @@ const Chat = () => {
               <Messages />
             </div>
             <div className="mt-auto px-5 py-3">
-              <InputMessages socket={socket} username={username}/>
+              <InputMessages socket={socket}/>
             </div>
           </div>
         </div>

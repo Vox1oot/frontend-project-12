@@ -4,8 +4,6 @@ const Messages = () => {
   const currentChannelID = useSelector((state) => state.channels.currentChannelId);
   const messages = useSelector((state) => state.messages);
 
-  //console.log(currentChannelID);
-
   return (
     messages
       .filter(({ channelId }) => channelId === currentChannelID)
