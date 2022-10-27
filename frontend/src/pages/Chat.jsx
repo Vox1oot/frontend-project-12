@@ -14,6 +14,8 @@ const socket = io("ws://localhost:3000");
 
 const username = localStorage.getItem('username'); // добавить в store ?
 
+console.log(username);
+
 const Chat = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
@@ -24,6 +26,7 @@ const Chat = () => {
   }, [auth.userData, dispatch]);
 
   socket.on('newMessage', (payload) => {
+    console.log(payload);
     dispatch(addMessage(payload));
   })
 

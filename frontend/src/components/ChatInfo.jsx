@@ -2,8 +2,11 @@ import { useSelector } from 'react-redux';
 
 const ChatInfo = () => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
+  const messages = useSelector((state) => state.messages);
   const channel = channels.find((channel) => channel.id == currentChannelId);
 
+  const countMessages = messages.filter(({ channelId }) => channelId === currentChannelId).length;
+  console.log(countMessages);
   //Добавить отображение количества сообщений
 
   return (
@@ -11,7 +14,7 @@ const ChatInfo = () => {
       <p className="m-0">
         <b>{channel ? `# ${channel.name}` : ''}</b>
       </p>
-      <span className="text-muted">0 сообщений</span> 
+      <span className="text-muted">{`${countMessages} сообщений`}</span> 
     </div>
   );
 };
