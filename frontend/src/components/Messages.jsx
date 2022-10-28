@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 const Messages = () => {
   const currentChannelID = useSelector((state) => state.channels.currentChannelId);
   const messages = useSelector((state) => state.messages);
-
+  
   return (
     messages
       .filter(({ channelId }) => channelId === currentChannelID)

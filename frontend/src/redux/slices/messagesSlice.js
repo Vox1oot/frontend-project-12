@@ -11,7 +11,7 @@ const messagesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
-      return payload.messages.filter(({ channelId }) => channelId === payload.currentChannelId);
+      return payload.messages;
     })
   }
 });

@@ -10,8 +10,7 @@ import Messages from "../components/Messages.jsx";
 import { addMessage } from "../redux/slices/messagesSlice.js";
 
 import { io } from "socket.io-client";
-
-const socket = io("ws://localhost:3000");
+const socket = io();
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -48,7 +47,7 @@ const Chat = () => {
               <Messages />
             </div>
             <div className="mt-auto px-5 py-3">
-              <InputMessages socket={socket}/>
+              <InputMessages socket={socket} />
             </div>
           </div>
         </div>
