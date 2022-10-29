@@ -12,9 +12,10 @@ import { channelSchema } from '../schemas/index.js';
 
 const isExistsChannelName = (channels, channelName) => channels.find((channel) => channel.name === channelName);
 
-const AddChannel = () => {
+const AddChannel = ({ socket }) => {
   const [showModal, setShowModal] = useState();
   const { channels } = useSelector((state) => state.channels);
+
   const toggleModal = () => setShowModal(!showModal);
 
   const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
@@ -26,12 +27,11 @@ const AddChannel = () => {
       if (isExistsChannelName(channels, channelName)) {
         actions.setFieldError('channelName', 'Имя канало должно быть уникально!');
       } else {
-        console.log('Все круто! продолжаем дальше!')
+        socket.emit('newChannel', { name: channelName });
+        toggleModal();
       }
     }
   })
-
-  console.log(errors.channelName);
 
   return (
     <>

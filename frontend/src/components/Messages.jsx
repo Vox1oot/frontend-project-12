@@ -8,12 +8,13 @@ const Messages = () => {
     messages
       .filter(({ channelId }) => channelId === currentChannelID)
       .map((message, index) => (
-      <div className='text-break mb-2' key={index}>
-        <b>{`${message.username}: `}</b>
-        {message.body}
+      <div className='text-break mb-2 ' key={index}>
+        <div className='message-container'>
+          <b>{`${message.username}: `}</b>
+          {message.body}
+        </div>
       </div>
     ))
-  )
-};
+)};
 
 export default Messages;

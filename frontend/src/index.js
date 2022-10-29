@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import store from './redux/index.js';
+import './styles/style.css';
 
 const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(

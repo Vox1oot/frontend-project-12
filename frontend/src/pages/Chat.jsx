@@ -8,7 +8,9 @@ import Channels from "../components/Channels.jsx";
 import ChatInfo from "../components/ChatInfo.jsx";
 import Messages from "../components/Messages.jsx";
 import AddChannel from "../components/AddChannel";
+
 import { addMessage } from "../redux/slices/messagesSlice.js";
+import { addChannel } from "../redux/slices/channelsSlice.js";
 
 import { io } from "socket.io-client";
 const socket = io();
@@ -24,7 +26,11 @@ const Chat = () => {
 
   socket.on('newMessage', (payload) => {
     dispatch(addMessage(payload));
-  })
+  });
+
+  socket.on('newChannel', (payload) => {
+    dispatch(addChannel(payload));
+  });
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -32,7 +38,7 @@ const Chat = () => {
         <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
             <span>Каналы</span>
-            <AddChannel />
+            <AddChannel socket={socket} />
           </div>
           <ul className="nav flex-column nav-pills nav-fill px-2">
             <Channels />

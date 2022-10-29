@@ -40,6 +40,7 @@ const InputMessage = ({ socket }) => {
             onChange={handleMessage}
             value={message}
             placeholder="Введите сообщение"
+            autoFocus
           />
           <Button type="submit" variant="primary">
             Отправить

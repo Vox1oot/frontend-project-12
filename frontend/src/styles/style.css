@@ -1,0 +1,6 @@
+.message-container {
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #e6e7ec;
+  padding: 10px;
+}

@@ -7,7 +7,11 @@ const channelsSlice = createSlice({
   reducers: {
     changeChannel: (state, { payload }) => {
       state.currentChannelId = payload;
-    }
+    },
+    addChannel: (state, { payload }) => {
+      state.channels.push(payload);
+      state.currentChannelId = payload.id;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
@@ -17,5 +21,5 @@ const channelsSlice = createSlice({
   }
 });
 
-export const { changeChannel } = channelsSlice.actions;
+export const { changeChannel, addChannel } = channelsSlice.actions;
 export default channelsSlice.reducer;
