@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
-//import { ListGroup } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 import { changeChannel } from '../redux/slices/channelsSlice.js';
+import { DeleteChannel } from "./deleteChannel.jsx";
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -36,7 +36,7 @@ const Channels = () => {
 
         {channel.removable && 
         <DropdownButton as={ButtonGroup} title="" id="bg-nested-dropdown" variant="light">
-          <Dropdown.Item eventKey="1">Удалить</Dropdown.Item>
+          <DeleteChannel />
           <Dropdown.Item eventKey="2">Переименовать</Dropdown.Item>
         </DropdownButton>}
 
