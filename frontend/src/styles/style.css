@@ -4,3 +4,11 @@
   background-color: #e6e7ec;
   padding: 10px;
 }
+
+.btn-channel {
+  text-align: left;
+}
+
+.message {
+  margin-left: 20px;
+}
