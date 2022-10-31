@@ -1,17 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import fetchAuthorizationData from '../thunk.js';
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: { channels: [], currentChannelId: 0 },
+  initialState: { channels: [], currentChannelId: 1 },
   reducers: {
     changeChannel: (state, { payload }) => {
+      console.log(current(state));
       state.currentChannelId = payload;
     },
     addChannel: (state, { payload }) => {
       state.channels.push(payload);
       state.currentChannelId = payload.id;
     },
+    deleteChannel: (state, { payload }) => {
+      const index = state.channels.findIndex((channel) => channel.id === payload.id);
+      index !== -1 ? state.channels.splice(index, 1) : new Error(`could not find a channel with current id: ${payload.id}`);
+      state.currentChannelId = 1;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
@@ -21,5 +27,5 @@ const channelsSlice = createSlice({
   }
 });
 
-export const { changeChannel, addChannel } = channelsSlice.actions;
+export const { changeChannel, addChannel, deleteChannel } = channelsSlice.actions;
 export default channelsSlice.reducer;

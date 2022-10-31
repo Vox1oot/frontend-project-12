@@ -17,8 +17,8 @@ const InputMessage = ({ socket }) => {
       body: message, 
       channelId,
       username: useAuth.data.username,
-    }, (responce) => {
-      if (responce.status === 'ok') {
+    }, (response) => {
+      if (response.status === 'ok') {
         setMessage('');
         input.current.focus();
       }

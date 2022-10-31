@@ -8,7 +8,7 @@ import { DeleteChannel } from "./deleteChannel.jsx";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const Channels = () => {
+const Channels = ({ socket }) => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
   const dispatch = useDispatch();
 
@@ -22,10 +22,10 @@ const Channels = () => {
 
   return (
     channels.map((channel, index) => (
-      <ButtonGroup key={index}>
+      <ButtonGroup className="w-100" key={index}>
 
         <Button
-          className='btn-channel'
+          className='btn-channel text-truncate text-start'
           variant="light" 
           id={channel.id} 
           active={currentChannelId == channel.id}
@@ -35,8 +35,8 @@ const Channels = () => {
         </Button>
 
         {channel.removable && 
-        <DropdownButton as={ButtonGroup} title="" id="bg-nested-dropdown" variant="light">
-          <DeleteChannel />
+        <DropdownButton  as={ButtonGroup} title="" id="bg-nested-dropdown" variant="light">
+          <DeleteChannel socket={socket} id={channel.id}/>
           <Dropdown.Item eventKey="2">Переименовать</Dropdown.Item>
         </DropdownButton>}
 
