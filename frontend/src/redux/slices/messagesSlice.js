@@ -1,5 +1,7 @@
-import { createSlice, } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import fetchAuthorizationData from '../thunk.js';
+
+import { deleteChannel } from './channelsSlice.js';
 
 const messagesSlice = createSlice({
   name: 'messages',
@@ -12,8 +14,11 @@ const messagesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorizationData.fulfilled, (state, { payload }) => {
       return payload.messages;
+    }),
+    builder.addCase(deleteChannel, (state, { payload }) => {
+      return state.filter(({ channelId }) => channelId !== payload.id);
     })
-  }
+  },
 });
 
 export const { addMessage }  = messagesSlice.actions;
