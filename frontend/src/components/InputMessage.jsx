@@ -1,5 +1,5 @@
 import { Form, InputGroup, Button } from 'react-bootstrap';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import useAuthContext from '../hooks/index.jsx';
@@ -23,7 +23,6 @@ const InputMessage = ({ socket }) => {
     }, (response) => {
       if (response.status === 'ok') {
         setMessage('');
-        input.current.focus();
         setSend(false)
       }
     });
@@ -33,6 +32,10 @@ const InputMessage = ({ socket }) => {
     const text = e.target.value;
     setMessage(text);
   };
+
+  useEffect(() => {
+    input.current.focus();
+  })
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -48,7 +51,7 @@ const InputMessage = ({ socket }) => {
             autoFocus
             required
             disabled={isSend}
-
+            autoComplete="off"
           />
           <Button type="submit" variant="primary" disabled={isSend}>
             Отправить

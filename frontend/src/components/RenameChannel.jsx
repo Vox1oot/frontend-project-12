@@ -63,6 +63,7 @@ export const RenameChannel = ({ socket, id }) => {
                 value={values.channelName}
                 placeholder="Введите имя канала"
                 autoFocus
+                autoComplete="off"
                 onChange={handleChange}
               />
             </Form.Group>
