@@ -6,12 +6,15 @@ import useAuthContext from '../hooks/index.jsx';
 
 const InputMessage = ({ socket }) => {
   const [message, setMessage] = useState('');
+  const [isSend, setSend] = useState(false);
+
   const channelId = useSelector((state) => state.channels.currentChannelId);
   const useAuth = useAuthContext();
   const input = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSend(true);
 
     socket.emit('newMessage', { 
       body: message, 
@@ -21,11 +24,12 @@ const InputMessage = ({ socket }) => {
       if (response.status === 'ok') {
         setMessage('');
         input.current.focus();
+        setSend(false)
       }
     });
   };
 
-  const handleMessage = (e) => {
+   const handleMessage = (e) => {
     const text = e.target.value;
     setMessage(text);
   };
@@ -35,14 +39,18 @@ const InputMessage = ({ socket }) => {
       <Form.Group>
         <InputGroup>
           <Form.Control
+            id="message"
             ref={input}
             type="text"
             onChange={handleMessage}
             value={message}
             placeholder="Введите сообщение"
             autoFocus
+            required
+            disabled={isSend}
+
           />
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" disabled={isSend}>
             Отправить
           </Button>
         </InputGroup>
