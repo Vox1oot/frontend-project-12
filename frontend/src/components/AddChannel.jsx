@@ -3,14 +3,13 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+//import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 
 import { channelSchema } from '../schemas/index.js';
-
-const isExistsChannelName = (channels, channelName) => channels.find((channel) => channel.name === channelName);
+import isExistsChannelName from '../utils/isExistsChannelName.js';
 
 const AddChannel = ({ socket }) => {
   const [showModal, setShowModal] = useState();
@@ -42,8 +41,8 @@ const AddChannel = ({ socket }) => {
         <Modal.Header closeButton>
           <Modal.Title>Добавить канал</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
           <Form onSubmit={handleSubmit}>
+          <Modal.Body>
             <Form.Group className="mb-3" >
               <Form.Control
                 className={ errors.channelName ? 'form-control is-invalid' : 'form-control' }
@@ -56,16 +55,16 @@ const AddChannel = ({ socket }) => {
               />
             </Form.Group>
             <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName}</Alert>
-            <ButtonGroup className="d-flex mb-2" >
-              <Button type="button" variant="secondary" onClick={toggleModal}>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button type="button" variant="secondary" onClick={toggleModal}>
                 Отменить
               </Button>
-              <Button type="submit" variant="primary" disabled={!isValid}>
+              <Button type="submit" variant="success" disabled={!isValid}>
                 Добавить
               </Button>
-            </ButtonGroup>
+            </Modal.Footer>
           </Form>
-        </Modal.Body>
       </Modal>
     </>
   );
