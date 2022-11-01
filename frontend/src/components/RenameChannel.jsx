@@ -16,9 +16,12 @@ export const RenameChannel = ({ socket, id }) => {
   const [showModal, setShowModal] = useState(false);
   const { channels } = useSelector((state) => state.channels);
 
-  const toggleModal = () => setShowModal(!showModal);
+  const toggleModal = () => {
+    resetForm();
+    return setShowModal(!showModal);
+  }
 
-  const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
+  const { values, handleChange, handleSubmit, errors, isValid, resetForm } = useFormik({
     initialValues: {
       channelName: '',
     },
