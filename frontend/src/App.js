@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
-import Nav from './components/Nav';
+//import Nav from './components/Nav';
 
 import Context from './context/index.jsx';
 import useAuthContext from './hooks/index.jsx';
@@ -32,7 +32,6 @@ const PrivateRoute = ({ children }) => {
 const App = () => {
   return (
     <MainProvider>
-      <Nav />
       <BrowserRouter>
         <Routes>
           <Route
