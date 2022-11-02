@@ -4,7 +4,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
-//import Nav from './components/Nav';
+import Signup from './pages/Signup';
+
 
 import Context from './context/index.jsx';
 import useAuthContext from './hooks/index.jsx';
@@ -43,6 +44,7 @@ const App = () => {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
