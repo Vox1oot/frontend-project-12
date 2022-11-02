@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 
 import Button from 'react-bootstrap/Button';
-//import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
@@ -48,11 +47,12 @@ const AddChannel = ({ socket }) => {
           <Modal.Body>
             <Form.Group className="mb-3" >
               <Form.Control
-                className={ errors.channelName ? 'form-control is-invalid' : 'form-control' }
+                className={ errors.channelName ? 'form-control is-invalid' : '' }
                 id="channelName"
                 type="text"
                 value={values.channelName}
                 placeholder="Введите имя канала"
+                autoComplete="off"
                 autoFocus
                 onChange={handleChange}
               />
