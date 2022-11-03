@@ -14,6 +14,7 @@ export const registartionSchema = yup.object().shape({
   password: yup.string()
     .matches(/^[a-z\d]+$/gi, 'Только латинские буквы и цифры')
     .min(6, 'Минимум 6 символов')
+    .max(20, 'Максимум 20 символов')
     .required('Обязательное поле'),
   confirmPassword: yup.string().required('Обязательное поле').oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
 })

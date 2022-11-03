@@ -12,3 +12,13 @@
 .message {
   margin-left: 5px;
 }
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-danger);
+  --bs-tooltip-arrow-height: 0;
+  --bs-tooltip-arrow-weight: 0;
+}
+
+.tooltip-inner:empty {
+  display: none;
+}
