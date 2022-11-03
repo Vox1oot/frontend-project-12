@@ -1,14 +1,21 @@
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import Nav from '../components/Nav';
+import { useNavigate } from 'react-router-dom';
+import useAuthContext from '../hooks/index.jsx';
 
 import { useFormik } from 'formik';
 import { registartionSchema } from '../schemas/index.js';
 
+import Nav from '../components/Nav';
+
 const Signup = () => {
+  const navigate = useNavigate();
+  const useAuth = useAuthContext();
+
   const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
     initialValues: {
       username: '',
@@ -16,12 +23,24 @@ const Signup = () => {
       confirmPassword: '',
     },
     validationSchema: registartionSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async ({ username, password }, actions ) => {
+      try {
+        const { data } = await axios.post('/api/v1/signup', { username, password });
+
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.username);
+          useAuth.setUserData(data);
+
+          navigate('/');
+        }
+      } catch (error) {
+        if (error.response.status === 409) {
+          actions.setFieldError('registration', 'Такой пользователь уже существует');
+        }
+      }
     },
   });
-
-  console.log(errors.confirmPassword);
 
   return (
     <>
@@ -49,7 +68,8 @@ const Signup = () => {
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.username && 'is-invalid'}
+                        className={errors.username && 'is-invalid'
+                        || errors.registration && 'is-invalid'}
                         type="text"
                         placeholder="Имя пользователя"
                         value={values.username}
@@ -70,7 +90,8 @@ const Signup = () => {
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.password && 'is-invalid'}
+                        className={errors.password && 'is-invalid'
+                        || errors.registration && 'is-invalid'}
                         type="password"
                         placeholder="Пароль"
                         value={values.password}
@@ -85,12 +106,13 @@ const Signup = () => {
                   <Form.Group className="form-floating mb-3" controlId="confirmPassword" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.confirmPassword}</Tooltip>}
-                      show={errors.confirmPassword}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.confirmPassword || errors.registration}</Tooltip>}
+                      show={errors.confirmPassword || errors.registration}
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.confirmPassword && 'is-invalid'}
+                        className={errors.confirmPassword && 'is-invalid' 
+                        || errors.registration && 'is-invalid'}
                         type="password"
                         placeholder="Подтвердите пароль"
                         value={values.confirmPassword}

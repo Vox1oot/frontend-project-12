@@ -26,8 +26,6 @@ const Login = () => {
             password,
           });
 
-          console.log(data);
-
           if (data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('username', data.username);
