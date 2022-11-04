@@ -6,3 +6,9 @@ start-backend:
 
 start:
 	make start-backend & make start-frontend
+
+lint:
+	make -C frontend lint
+
+install:
+	make -C frontend install
