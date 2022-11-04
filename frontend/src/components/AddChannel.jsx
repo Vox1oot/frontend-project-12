@@ -43,11 +43,11 @@ const AddChannel = ({ socket }) => {
         <Modal.Header closeButton>
           <Modal.Title>Добавить канал</Modal.Title>
         </Modal.Header>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group className="mb-3" >
               <Form.Control
-                className={ errors.channelName ? 'form-control is-invalid' : '' }
+                className={ errors.channelName && 'form-control is-invalid' }
                 id="channelName"
                 type="text"
                 value={values.channelName}
@@ -55,19 +55,19 @@ const AddChannel = ({ socket }) => {
                 autoComplete="off"
                 autoFocus
                 onChange={handleChange}
-              />
+                />
             </Form.Group>
             <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName}</Alert>
-            </Modal.Body>
-            <Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
             <Button type="button" variant="secondary" onClick={toggleModal}>
-                Отменить
-              </Button>
-              <Button type="submit" variant="success" disabled={!isValid}>
-                Добавить
-              </Button>
-            </Modal.Footer>
-          </Form>
+              Отменить
+            </Button>
+            <Button type="submit" variant="success" disabled={!isValid}>
+              Добавить
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

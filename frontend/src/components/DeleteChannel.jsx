@@ -5,14 +5,17 @@ import { Dropdown } from 'react-bootstrap';
 
 export const DeleteChannel = ({ socket, id }) => {
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const toggleModal = () => setShowModal(!showModal);
 
   const deleteChannel = () => {
+    setSubmitting(true);
+
     socket.emit('removeChannel', { id }, (response) => {
       if (response.status === 'ok') {
+        setSubmitting(false);
         toggleModal();
-        console.log('Канал был удален!!')
       }
     });
   };
@@ -32,7 +35,7 @@ export const DeleteChannel = ({ socket, id }) => {
           <Button variant="secondary" onClick={toggleModal}>
             Отменить
           </Button>
-          <Button variant="danger" onClick={deleteChannel}>
+          <Button variant="danger" onClick={deleteChannel} disabled={isSubmitting}>
             Удалить
           </Button>
         </Modal.Footer>

@@ -12,7 +12,7 @@ const Nav = ({ button }) => {
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container">
-        <a className="navbar-brand" href='/'>My chat</a>
+        <a className="navbar-brand" href='/'>Чат</a>
         {button && <Button type="button" onClick={logout}>Выйти</Button>}
       </div>
     </nav>

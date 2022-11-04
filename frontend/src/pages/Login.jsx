@@ -1,19 +1,24 @@
-import { useFormik } from 'formik';
-import axios from 'axios';
 import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Nav from '../components/Nav';
+
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
+import { useFormik } from 'formik';
+import axios from 'axios';
 
 import schema from '../schemas/index.js';
 import useAuthContext from '../hooks/index.jsx';
-
-import Nav from '../components/Nav';
 
 const Login = () => {
   const navigate = useNavigate();
   const inputUserName = useRef(null);
   const useAuth = useAuthContext();
 
-  const { values, handleChange, handleSubmit, errors, isSubmitting } = useFormik({
+  const { values, handleChange, handleSubmit, errors, isValid, isSubmitting } = useFormik({
       initialValues: {
         username: '',
         password: '',
@@ -35,10 +40,7 @@ const Login = () => {
           }
         } catch (error) {
           if (error.response.status === 401) {
-            actions.setFieldError(
-              'authentication',
-              'Неверное имя пользователя и/или пароль!'
-            );
+            actions.setFieldError('authentication', 'Неверное имя пользователя и/или пароль!');
           }
         }
       },
@@ -63,57 +65,63 @@ const Login = () => {
                     alt="Войти"
                   />
                 </div>
-                <form onSubmit={handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0" >
+
+                <Form className="w-50" onSubmit={handleSubmit}>
                   <h1 className="text-center mb-4">Войти</h1>
-                  <div className="form-floating mb-3">
-                    <input
-                      ref={inputUserName}
-                      type="text"
-                      name="username"
-                      required
-                      placeholder="Ваш ник"
-                      id="username"
-                      className={
-                        errors.authentication
-                          ? 'form-control is-invalid'
-                          : 'form-control'
-                      }
-                      value={values.username}
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="username">Ваш ник</label>
-                  </div>
-                  <div className="form-floating mb-4">
-                    <input
-                      type="password"
-                      name="password"
-                      autoComplete="current-password"
-                      required
-                      placeholder="Пароль"
-                      id="password"
-                      className={
-                        errors.authentication
-                          ? 'form-control is-invalid'
-                          : 'form-control'
-                      }
-                      value={values.password}
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="pasword">Пароль</label>
-                    {errors.authentication && (
-                      <div className="invalid-tooltip">
-                        {errors.authentication}
-                      </div>
-                    )}
-                  </div>
-                  <button
+                  <Form.Group className="form-floating mb-3" controlId="username" >
+                    <OverlayTrigger
+                      placement="bottom-start"
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username}</Tooltip>}
+                      show={errors.username}
+                      trigger='focus'
+                    >
+                      <Form.Control
+                        className={errors.username && 'is-invalid'
+                        || errors.authentication && 'is-invalid'}
+                        type="text"
+                        placeholder="Ваш ник"
+                        value={values.username}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                        autoFocus
+                        ref={inputUserName}
+                      />
+                    </OverlayTrigger>
+                    <Form.Label>Ваш ник</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group className="form-floating mb-3" controlId="password" >
+                    <OverlayTrigger
+                      placement="bottom-start"
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password || errors.authentication}</Tooltip>}
+                      show={errors.password}
+                      trigger='focus'
+                    >
+                      <Form.Control
+                        className={errors.password && 'is-invalid'
+                        || errors.authentication && 'is-invalid'}
+                        type="password"
+                        placeholder="Пароль"
+                        value={values.password}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                      />
+                    </OverlayTrigger>
+                    <Form.Label>Пароль</Form.Label>
+                  </Form.Group>
+
+                  <Button
+                    className="w-100"
+                    variant="outline-primary"
                     type="submit"
-                    className="w-100 mb-3 btn btn-outline-primary"
-                    disabled={isSubmitting}
+                    disabled={!isValid || isSubmitting}
                   >
                     Войти
-                  </button>
-                </form>
+                  </Button>
+                </Form>
+
               </div>
               <div className="card-footer p-4">
                 <div className="text-center">

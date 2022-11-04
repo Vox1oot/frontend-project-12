@@ -44,7 +44,6 @@ export const RenameChannel = ({ socket, id }) => {
       <Dropdown.Item eventKey="2" onClick={toggleModal}>
         Переименовать
       </Dropdown.Item>
-
       <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Переименовать канал</Modal.Title>
@@ -53,17 +52,13 @@ export const RenameChannel = ({ socket, id }) => {
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Control
-                className={
-                  errors.channelName
-                    ? 'form-control is-invalid'
-                    : 'form-control'
-                }
+                className={errors.channelName && 'form-control is-invalid'}
                 id="channelName"
                 type="text"
                 value={values.channelName}
                 placeholder="Введите имя канала"
-                autoFocus
                 autoComplete="off"
+                autoFocus
                 onChange={handleChange}
               />
             </Form.Group>
