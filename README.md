@@ -1,4 +1,4 @@
-### A simplified version of Slack chat. The chat has a system of registration, authorization. The chat has the ability to create channels, change channel names and delete them.:
+### A simplified version of Slack chat. The chat has a system of registration, authorization. The chat has the ability to create channels, change channel names and delete them.
 
 [![Actions Status](https://github.com/Vox1oot/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Vox1oot/frontend-project-12/actions)
 
