@@ -6,9 +6,10 @@ import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
 import Signup from './pages/Signup';
 
-
 import Context from './context/index.jsx';
 import useAuthContext from './hooks/index.jsx';
+
+import { io } from "socket.io-client";
 
 const MainProvider = ({ children }) => {
   const [userData, setUserData] = useState({ 
@@ -30,7 +31,11 @@ const PrivateRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" />;
 };
 
+const socket = io();
+
 const App = () => {
+  console.log('App выполнился!')
+
   return (
     <MainProvider>
       <BrowserRouter>
@@ -39,7 +44,7 @@ const App = () => {
             path="/"
             element={
               <PrivateRoute>
-                <Chat />
+                <Chat socket={socket}/>
               </PrivateRoute>
             }
           />

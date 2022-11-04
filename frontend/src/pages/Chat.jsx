@@ -14,12 +14,12 @@ import Nav from '../components/Nav';
 import { addMessage } from "../redux/slices/messagesSlice.js";
 import { addChannel, deleteChannel, renameChannel } from "../redux/slices/channelsSlice.js";
 
-import { io } from "socket.io-client";
-const socket = io();
 
-const Chat = () => {
+const Chat = ({ socket }) => {
   const dispatch = useDispatch();
   const { data }= useAuthContext();
+
+  socket.removeAllListeners();
 
   socket.on('newMessage', (payload) => {
     dispatch(addMessage(payload));

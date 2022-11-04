@@ -71,7 +71,7 @@ const Login = () => {
                   <Form.Group className="form-floating mb-3" controlId="username" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username || errors.authentication}</Tooltip>}
                       show={errors.username}
                       trigger='focus'
                     >
@@ -94,7 +94,7 @@ const Login = () => {
                   <Form.Group className="form-floating mb-3" controlId="password" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password || errors.authentication}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password}</Tooltip>}
                       show={errors.password}
                       trigger='focus'
                     >

@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import fetchAuthorizationData from '../thunk.js';
 
 const findIndex = (channels, id) => channels.findIndex((channel) => channel.id === id);
@@ -8,7 +8,6 @@ const channelsSlice = createSlice({
   initialState: { channels: [], currentChannelId: 1 },
   reducers: {
     changeChannel: (state, { payload }) => {
-      console.log(current(state));
       state.currentChannelId = payload;
     },
     addChannel: (state, { payload }) => {
