@@ -6,9 +6,9 @@
 
 ### Installation Guide:
 
-* ```$git clone: https://github.com/Vox1oot/frontend-project-12.git```
-* ```$make install```
-* ```$make start``` - run the frontend & backend
-* ```$make start-frontend``` - run only frontend
-* ```$make start-backend``` - run only backend
+* ```$ git clone: https://github.com/Vox1oot/frontend-project-12.git```
+* ```$ make install```
+* ```$ make start``` - run the frontend & backend
+* ```$ make start-frontend``` - run only frontend
+* ```$ make start-backend``` - run only backend
 
