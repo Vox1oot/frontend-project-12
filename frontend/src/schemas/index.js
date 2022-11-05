@@ -7,16 +7,16 @@ const schema = yup.object().shape({
 
 export const registartionSchema = yup.object().shape({
   username: yup.string()
-    .matches(/^[a-z\d]+$/gi, 'Только латинские буквы и цифры')
-    .min(3, 'Минимум 3 символа')
-    .max(20, 'Максимум 20 символов')
-    .required('Обязательное поле'),
+    .matches(/^[a-z\d]+$/gi, 'latin')
+    .min(3, 'min3')
+    .max(20, 'max')
+    .required('required'),
   password: yup.string()
-    .matches(/^[a-z\d]+$/gi, 'Только латинские буквы и цифры')
-    .min(6, 'Минимум 6 символов')
-    .max(20, 'Максимум 20 символов')
-    .required('Обязательное поле'),
-  confirmPassword: yup.string().required('Обязательное поле').oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
+    .matches(/^[a-z\d@$!%*#?&]+$/gi, 'validPassword')
+    .min(6, 'min6')
+    .max(20, 'max')
+    .required('required'),
+  confirmPassword: yup.string().required('required').oneOf([yup.ref('password'), null], 'match'),
 })
 
 export const channelSchema = yup.object().shape({

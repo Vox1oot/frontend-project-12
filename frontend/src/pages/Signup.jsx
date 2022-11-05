@@ -39,11 +39,13 @@ const Signup = () => {
         }
       } catch (error) {
         if (error.response.status === 409) {
-          actions.setFieldError('registration', 'Такой пользователь уже существует');
+          actions.setFieldError('registration', 'exists');
         }
       }
     },
   });
+
+  console.log(errors.username);
 
   return (
     <>
@@ -66,7 +68,7 @@ const Signup = () => {
                   <Form.Group className="form-floating mb-3" controlId="username" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username && t(`errors.${errors.username}`)}</Tooltip>}
                       show={errors.username}
                       trigger='focus'
                     >
@@ -88,7 +90,7 @@ const Signup = () => {
                   <Form.Group className="form-floating mb-3" controlId="password" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password && t(`errors.${errors.password}`)}</Tooltip>}
                       show={errors.password}
                       trigger='focus'
                     >
@@ -109,7 +111,8 @@ const Signup = () => {
                   <Form.Group className="form-floating mb-3" controlId="confirmPassword" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.confirmPassword || errors.registration}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.confirmPassword && t(`errors.${errors.confirmPassword}`)
+                        || errors.registration && t(`errors.${errors.registration}`)}</Tooltip>}
                       show={errors.confirmPassword || errors.registration}
                       trigger='focus'
                     >
