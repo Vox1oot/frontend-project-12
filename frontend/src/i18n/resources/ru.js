@@ -28,6 +28,10 @@ export default {
       areYouSure: 'Вы уверены ?',
       haveAccount: 'Нет аккаунта?',
     },
+    errors: {
+      required: 'Пожалуйста, заполните это поле',
+      auth: 'Неверные имя пользователя или пароль',
+    },
     notFoundPage: 'Страница не найдена',
     canGoTo: 'Но вы можете перейти',
     linkToMain: 'на главную страницу',
