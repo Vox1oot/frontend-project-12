@@ -10,9 +10,12 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { Dropdown } from 'react-bootstrap';
 
+import { useTranslation } from 'react-i18next';
+
 import isExistsChannelName from '../utils/isExistsChannelName.js';
 
 export const RenameChannel = ({ socket, id }) => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const { channels } = useSelector((state) => state.channels);
 
@@ -42,11 +45,11 @@ export const RenameChannel = ({ socket, id }) => {
   return (
     <>
       <Dropdown.Item eventKey="2" onClick={toggleModal}>
-        Переименовать
+        {t('buttons.rename')}
       </Dropdown.Item>
       <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Переименовать канал</Modal.Title>
+          <Modal.Title>{t('channels.renameChannel')}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
@@ -56,7 +59,7 @@ export const RenameChannel = ({ socket, id }) => {
                 id="channelName"
                 type="text"
                 value={values.channelName}
-                placeholder="Введите имя канала"
+                placeholder={t('channels.typeChannelName')}
                 autoComplete="off"
                 autoFocus
                 onChange={handleChange}
@@ -68,10 +71,10 @@ export const RenameChannel = ({ socket, id }) => {
           </Modal.Body>
           <Modal.Footer>
             <Button type="button" variant="secondary" onClick={toggleModal}>
-              Отменить
+            {t('buttons.cancel')}
             </Button>
             <Button type="submit" variant="danger" disabled={!isValid}>
-              Переименовать
+            {t('buttons.rename')}
             </Button>
           </Modal.Footer>
         </Form>

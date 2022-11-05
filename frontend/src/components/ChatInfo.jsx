@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const ChatInfo = () => {
+  const { t } = useTranslation();
   const { channels, currentChannelId } = useSelector((state) => state.channels);
   const messages = useSelector((state) => state.messages);
   const channel = channels.find((channel) => channel.id == currentChannelId);
@@ -12,7 +14,7 @@ const ChatInfo = () => {
       <p className="m-0">
         <b>{channel ? `# ${channel.name}` : ''}</b>
       </p>
-      <span className="text-muted">{`${countMessages} сообщений`}</span> 
+      <span className="text-muted">{`${countMessages} ${t('messages')}`}</span> 
     </div>
   );
 };

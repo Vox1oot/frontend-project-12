@@ -7,10 +7,13 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 
+import { useTranslation } from 'react-i18next';
+
 import { channelSchema } from '../schemas/index.js';
 import isExistsChannelName from '../utils/isExistsChannelName.js';
 
 const AddChannel = ({ socket }) => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState();
   const { channels } = useSelector((state) => state.channels);
 
@@ -41,7 +44,7 @@ const AddChannel = ({ socket }) => {
       </Button>
       <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Добавить канал</Modal.Title>
+          <Modal.Title>{t('channels.addChannel')}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
@@ -51,7 +54,7 @@ const AddChannel = ({ socket }) => {
                 id="channelName"
                 type="text"
                 value={values.channelName}
-                placeholder="Введите имя канала"
+                placeholder={t('channels.typeChannelName')}
                 autoComplete="off"
                 autoFocus
                 onChange={handleChange}
@@ -61,10 +64,10 @@ const AddChannel = ({ socket }) => {
           </Modal.Body>
           <Modal.Footer>
             <Button type="button" variant="secondary" onClick={toggleModal}>
-              Отменить
+            {t('buttons.cancel')}
             </Button>
             <Button type="submit" variant="success" disabled={!isValid}>
-              Добавить
+            {t('buttons.add')}
             </Button>
           </Modal.Footer>
         </Form>

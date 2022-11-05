@@ -3,7 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Dropdown } from 'react-bootstrap';
 
+import { useTranslation } from 'react-i18next';
+
 export const DeleteChannel = ({ socket, id }) => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -23,20 +26,20 @@ export const DeleteChannel = ({ socket, id }) => {
   return (
     <>
     <Dropdown.Item eventKey="1" onClick={toggleModal}>
-        Удалить
+        {t('buttons.delete')}
     </Dropdown.Item>
 
       <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Удалить канал</Modal.Title>
+          <Modal.Title>{t('channels.delete')}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Вы уверены ?</Modal.Body>
+        <Modal.Body>{t('questions.areYouSure')}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={toggleModal}>
-            Отменить
+            {t('buttons.cancel')}
           </Button>
           <Button variant="danger" onClick={deleteChannel} disabled={isSubmitting}>
-            Удалить
+            {t('buttons.delete')}
           </Button>
         </Modal.Footer>
       </Modal>

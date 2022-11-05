@@ -2,9 +2,12 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { useTranslation } from 'react-i18next';
+
 import useAuthContext from '../hooks/index.jsx';
 
 const InputMessage = ({ socket }) => {
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const [isSend, setSend] = useState(false);
 
@@ -47,14 +50,14 @@ const InputMessage = ({ socket }) => {
             type="text"
             onChange={handleMessage}
             value={message}
-            placeholder="Введите сообщение"
+            placeholder={t('typeMessage')}
             autoFocus
             required
             disabled={isSend}
             autoComplete="off"
           />
           <Button type="submit" variant="primary" disabled={isSend}>
-            Отправить
+          {t('buttons.send')}
           </Button>
         </InputGroup>
       </Form.Group>
