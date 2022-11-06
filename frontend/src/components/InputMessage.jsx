@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import useAuthContext from '../hooks/index.jsx';
 
+import filter  from 'leo-profanity';
+
 const InputMessage = ({ socket }) => {
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
@@ -20,7 +22,7 @@ const InputMessage = ({ socket }) => {
     setSend(true);
 
     socket.emit('newMessage', { 
-      body: message, 
+      body: filter.clean(message), 
       channelId,
       username: useAuth.data.username,
     }, (response) => {

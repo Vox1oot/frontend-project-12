@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useTranslation } from 'react-i18next'
+import filter  from 'leo-profanity';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
+
+  filter.loadDictionary(language);
 
   const toggleLanguage = (lng) => {
     i18n.changeLanguage(lng);
