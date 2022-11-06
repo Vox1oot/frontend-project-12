@@ -1,16 +1,5 @@
-.message-container {
-  display: inline-block;
-  border-radius: 5px;
-  background-color: #e6e7ec;
-  padding: 10px;
-}
-
 .btn-channel {
   text-align: left;
-}
-
-.message {
-  margin-left: 5px;
 }
 
 .custom-tooltip {
@@ -22,3 +11,17 @@
 .tooltip-inner:empty {
   display: none;
 }
+
+@media (max-width: 600px) {
+  #message {
+    width: 100%!important;
+    border-radius: 1px;
+  }
+
+  #b-send {
+    width: 100%!important;
+    border-radius: 1px;
+  }
+}
+
+

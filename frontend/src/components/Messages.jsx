@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import Toast from 'react-bootstrap/Toast';
+//import Toast from 'react-bootstrap/Toast';
 
 const Messages = () => {
   const currentChannelID = useSelector(
@@ -11,14 +11,14 @@ const Messages = () => {
   return messages
     .filter(({ channelId }) => channelId === currentChannelID)
     .map((message, index) => (
-      <Toast className="d-block m-2" key={index}>
-        <Toast.Body className="p-2">
-          <div>
+      <div className="text-break mb-2" key={index}>
+        <div>
+          <div className='d-inline-block shadow p-3 bg-body rounded'>
             <b>{message.username}:</b>
-            <span className='message'>{message.body}</span>
+            <span className="message ms-2">{message.body}</span>
           </div>
-        </Toast.Body>
-      </Toast>
+        </div>
+      </div>
     ));
 };
 

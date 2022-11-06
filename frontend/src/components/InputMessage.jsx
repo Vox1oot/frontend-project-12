@@ -56,7 +56,7 @@ const InputMessage = ({ socket }) => {
             disabled={isSend}
             autoComplete="off"
           />
-          <Button type="submit" variant="primary" disabled={isSend}>
+          <Button id="b-send" type="submit" variant="primary" disabled={isSend}>
           {t('buttons.send')}
           </Button>
         </InputGroup>
