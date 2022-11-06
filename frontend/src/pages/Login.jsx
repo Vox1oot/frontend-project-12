@@ -51,8 +51,6 @@ const Login = () => {
       },
     });
 
-  console.log(errors);
-
   useEffect(() => {
     inputUserName.current.focus();
   }, [errors.authentication]);

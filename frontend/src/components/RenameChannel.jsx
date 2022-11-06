@@ -14,6 +14,8 @@ import { useTranslation } from 'react-i18next';
 
 import isExistsChannelName from '../utils/isExistsChannelName.js';
 
+import { toastInfo } from '../toasts/index.js';
+
 export const RenameChannel = ({ socket, id }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +35,7 @@ export const RenameChannel = ({ socket, id }) => {
       if (isExistsChannelName(channels, channelName)) {
         actions.setFieldError('channelName','uniq');
       } else {
+        toastInfo(t('toasts.rename'));
         socket.emit('renameChannel', { id, name: channelName });
         toggleModal();
       }
