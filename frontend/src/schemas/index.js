@@ -21,10 +21,10 @@ export const registartionSchema = yup.object().shape({
 
 export const channelSchema = yup.object().shape({
   channelName: yup.string()
-    .matches(/^[a-zа-я\d]+$/gi, 'Только буквы и цифры')
-    .min(3, 'От 3 до 20 символов')
-    .max(20,'От 3 до 20 символов')
-    .required('Обязательное поле'),
+    .matches(/^[a-zа-я\d]+$/gi, 'onlyNumAndLetters')
+    .min(3, 'min3')
+    .max(20,'max')
+    .required('required'),
 });
 
 export default schema;

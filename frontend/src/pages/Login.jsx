@@ -71,7 +71,7 @@ const Login = () => {
                   />
                 </div>
 
-                <Form className="w-50" onSubmit={handleSubmit}>
+                <Form className='col-12 col-md-6 mt-3 mt-mb-0' onSubmit={handleSubmit}>
                   <h1 className="text-center mb-4">{t('signIn')}</h1>
                   <Form.Group className="form-floating mb-3" controlId="username" >
                     <OverlayTrigger

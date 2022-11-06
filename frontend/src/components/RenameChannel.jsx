@@ -31,10 +31,7 @@ export const RenameChannel = ({ socket, id }) => {
     validationSchema: channelSchema,
     onSubmit: ({ channelName }, actions) => {
       if (isExistsChannelName(channels, channelName)) {
-        actions.setFieldError(
-          'channelName',
-          'Имя канало должно быть уникально!'
-        );
+        actions.setFieldError('channelName','uniq');
       } else {
         socket.emit('renameChannel', { id, name: channelName });
         toggleModal();
@@ -65,9 +62,7 @@ export const RenameChannel = ({ socket, id }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-            <Alert show={!!errors.channelName} variant="danger">
-              {errors.channelName}
-            </Alert>
+            <Alert show={!!errors.channelName} variant="danger">{errors.channelName && t(`errors.${errors.channelName}`)}</Alert>
           </Modal.Body>
           <Modal.Footer>
             <Button type="button" variant="secondary" onClick={toggleModal}>
