@@ -9,11 +9,11 @@ import Signup from './pages/Signup';
 import Context from './context/index.jsx';
 import useAuthContext from './hooks/index.jsx';
 
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 
 const MainProvider = ({ children }) => {
-  const [userData, setUserData] = useState({ 
-    token: localStorage.getItem('token'), 
+  const [userData, setUserData] = useState({
+    token: localStorage.getItem('token'),
     username: localStorage.getItem('username'),
   });
 
@@ -42,7 +42,7 @@ const App = () => {
             path="/"
             element={
               <PrivateRoute>
-                <Chat socket={socket}/>
+                <Chat socket={socket} />
               </PrivateRoute>
             }
           />
