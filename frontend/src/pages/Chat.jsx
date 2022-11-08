@@ -18,8 +18,6 @@ import { addChannel, deleteChannel, renameChannel } from "../redux/slices/channe
 
 //?
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 const Chat = ({ socket }) => {
   const { t } = useTranslation();

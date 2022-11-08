@@ -1,6 +1,6 @@
 export default {
   translation: {
-    chat: 'Chat',
+    chat: 'Hexlet Chat',
     buttons: {
       logout: 'Log out',
       logon: 'Log in',
@@ -40,7 +40,7 @@ export default {
       exists: 'This user already exists',
       onlyNumAndLetters: 'Only letters and numbers',
       uniq: 'The channel name must be unique',
-      
+      network: 'Netwok error',
     },
     toasts: {
       add: 'The channel has been created',

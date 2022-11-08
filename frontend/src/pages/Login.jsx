@@ -19,6 +19,10 @@ import { useTranslation } from 'react-i18next';
 
 import { useRollbar } from '@rollbar/react';
 
+import { toastError  } from '../toasts/index.js';
+
+import { ToastContainer } from 'react-toastify';
+
 const Login = () => {
   const rollbar = useRollbar();
   const { t } = useTranslation();
@@ -48,6 +52,11 @@ const Login = () => {
           }
         } catch (error) {
           rollbar.error('Login error', error);
+
+          if (error.code === "ERR_NETWORK") {
+            toastError(t('errors.network'));
+          }
+
           if (error.response.status === 401) {
             actions.setFieldError('authentication', 'auth');
           }
@@ -148,6 +157,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
