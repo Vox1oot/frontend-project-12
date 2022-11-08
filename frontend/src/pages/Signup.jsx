@@ -14,7 +14,10 @@ import Nav from '../components/Nav';
 
 import { useTranslation } from 'react-i18next';
 
+import { useRollbar } from '@rollbar/react';
+
 const Signup = () => {
+  const rollbar = useRollbar();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const useAuth = useAuthContext();
@@ -38,6 +41,7 @@ const Signup = () => {
           navigate('/');
         }
       } catch (error) {
+        rollbar.error('Sign up', error);
         if (error.response.status === 409) {
           actions.setFieldError('registration', 'exists');
         }

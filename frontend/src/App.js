@@ -34,6 +34,7 @@ const PrivateRoute = ({ children }) => {
 const socket = io();
 
 const App = () => {
+
   return (
     <MainProvider>
       <BrowserRouter>

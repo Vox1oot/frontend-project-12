@@ -17,7 +17,6 @@ import useAuthContext from '../hooks/index.jsx';
 
 import { useTranslation } from 'react-i18next';
 
-//
 import { useRollbar } from '@rollbar/react';
 
 const Login = () => {
@@ -48,8 +47,7 @@ const Login = () => {
             navigate('/');
           }
         } catch (error) {
-          console.log(error);
-          rollbar.error('test', error);
+          rollbar.error('Login error', error);
           if (error.response.status === 401) {
             actions.setFieldError('authentication', 'auth');
           }

@@ -16,9 +16,11 @@ import i18Instance from './i18n/index.js';
 
 //rollbar
 const rollbarConfig = {
+  enabled: true,
   // eslint-disable-next-line no-undef
   accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
-  environment: 'production',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
 };
 
 const root = ReactDOM.createRoot(document.getElementById('chat'));
