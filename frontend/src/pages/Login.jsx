@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import Nav from '../components/Nav';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -150,7 +150,7 @@ const Login = () => {
               <div className="card-footer p-4">
                 <div className="text-center">
                   <span>{t('questions.haveAccount')} </span>
-                  <a href="#" onClick={() => navigate('/signup')}>{t('registration')}</a>
+                  <Link to="/signup">{t('registration')}</Link>
                 </div>
               </div>
             </div>
