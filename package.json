@@ -1,5 +1,5 @@
 {
-  "name": "frontend-project-12",
+  "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Chat (Slack)",
   "main": "index.js",
