@@ -8,6 +8,8 @@ import useAuthContext from '../hooks/index.jsx';
 
 import filter  from 'leo-profanity';
 
+import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
+
 const InputMessage = ({ socket }) => {
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
@@ -25,10 +27,10 @@ const InputMessage = ({ socket }) => {
       body: filter.clean(message), 
       channelId,
       username: useAuth.data.username,
-    }, (response) => {
-      if (response.status === 'ok') {
+    }, ({ status }) => {
+      if (status) {
         setMessage('');
-        setSend(false)
+        setSend(false);
       }
     });
   };
@@ -39,8 +41,12 @@ const InputMessage = ({ socket }) => {
   };
 
   useEffect(() => {
+    if (isSend) {
+      const toggle = unlockElementWithDelay(setSend, 3000);
+      toggle(false);
+    }
     input.current.focus();
-  })
+  }, [isSend]);
 
   return (
     <Form onSubmit={handleSubmit}>
