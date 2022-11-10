@@ -79,7 +79,7 @@ const AddChannel = ({ socket }) => {
             <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName && t(`errors.${errors.channelName}`)}</Alert>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="button" variant="secondary" onClick={toggleModal}>
+            <Button type="button" variant="secondary" onClick={toggleModal} disabled={isSubmitting}>
             {t('buttons.cancel')}
             </Button>
             <Button type="submit" variant="success" disabled={!isValid || isSubmitting}>
