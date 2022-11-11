@@ -12,7 +12,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { useFormik } from 'formik';
 import axios from 'axios';
 
-import schema from '../schemas/index.js';
+//import schema from '../schemas/index.js';
 import useAuthContext from '../hooks/index.jsx';
 
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,7 @@ const Login = () => {
         username: '',
         password: '',
       },
-      validationSchema: schema,
+      /* validationSchema: schema, */
       onSubmit: async ({ username, password }, actions) => {
         try {
           const { data } = await axios.post('/api/v1/login', {
@@ -88,20 +88,8 @@ const Login = () => {
                 <Form className='col-12 col-md-6 mt-3 mt-mb-0' onSubmit={handleSubmit}>
                   <h1 className="text-center mb-4">{t('signIn')}</h1>
                   <Form.Group className="form-floating mb-3" controlId="username" >
-                    <OverlayTrigger
-                      placement="bottom-start"
-                      overlay={
-                      <Tooltip className="custom-tooltip tooltip" >
-                        {errors.username && t(`errors.${errors.username}`) 
-                        || errors.authentication && t(`errors.${errors.authentication}`)}
-                      </Tooltip>
-                        }
-                      show={errors.username}
-                      trigger='focus'
-                    >
                       <Form.Control
-                        className={errors.username && 'is-invalid'
-                        || errors.authentication && 'is-invalid'}
+                        className={errors.authentication && 'is-invalid'}
                         type="text"
                         value={values.username}
                         onChange={handleChange}
@@ -111,20 +99,18 @@ const Login = () => {
                         autoFocus
                         ref={inputUserName}
                       />
-                    </OverlayTrigger>
                     <Form.Label>{t('user.nickname')}</Form.Label>
                   </Form.Group>
 
                   <Form.Group className="form-floating mb-3" controlId="password" >
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password && t(`errors.${errors.password}`)}</Tooltip>}
-                      show={errors.password}
+                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.authentication && t(`errors.${errors.authentication}`)}</Tooltip>}
+                      show={errors.authentication}
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.password && 'is-invalid'
-                        || errors.authentication && 'is-invalid'}
+                        className={errors.authentication && 'is-invalid'}
                         type="password"
                         placeholder={t('user.password')}
                         value={values.password}
