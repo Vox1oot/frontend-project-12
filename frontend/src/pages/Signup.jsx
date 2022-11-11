@@ -22,7 +22,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const useAuth = useAuthContext();
 
-  const { values, handleChange, handleSubmit, errors, isValid, handleBlur, touched } = useFormik({
+  const { values, handleChange, handleSubmit, errors, handleBlur, touched } = useFormik({
     initialValues: {
       username: '',
       password: '',
@@ -137,7 +137,6 @@ const Signup = () => {
                     className="w-100"
                     variant="outline-primary"
                     type="submit"
-                    disabled={!isValid}
                   >
                     {t('buttons.registration')}
                   </Button>
