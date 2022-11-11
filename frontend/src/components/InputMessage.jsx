@@ -56,6 +56,7 @@ const InputMessage = ({ socket }) => {
             id="message"
             ref={input}
             type="text"
+            aria-label="Новое сообщение"
             onChange={handleMessage}
             value={message}
             placeholder={t('typeMessage')}
