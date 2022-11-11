@@ -22,7 +22,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const useAuth = useAuthContext();
 
-  const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
+  const { values, handleChange, handleSubmit, errors, isValid, handleBlur, touched } = useFormik({
     initialValues: {
       username: '',
       password: '',
@@ -49,6 +49,8 @@ const Signup = () => {
     },
   });
 
+  console.log(touched.username);
+
   return (
     <>
       <Nav />
@@ -71,19 +73,19 @@ const Signup = () => {
                     <OverlayTrigger
                       placement="bottom-start"
                       overlay={<Tooltip className="custom-tooltip tooltip" >{errors.username && t(`errors.${errors.username}`)}</Tooltip>}
-                      show={errors.username}
+                      show={!!touched.username && errors.username}
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.username && 'is-invalid'
-                        || errors.registration && 'is-invalid'}
+                        className={!!touched.username && (errors.username && 'is-invalid' || errors.registration && 'is-invalid')}
                         type="text"
                         placeholder={t('user.username')}
                         value={values.username}
                         onChange={handleChange}
-                        required
+                        onBlur={handleBlur}
                         autoComplete="off"
                         autoFocus
+                        required
                       />
                     </OverlayTrigger>
                     <Form.Label>{t('user.username')}</Form.Label>
@@ -93,18 +95,18 @@ const Signup = () => {
                     <OverlayTrigger
                       placement="bottom-start"
                       overlay={<Tooltip className="custom-tooltip tooltip" >{errors.password && t(`errors.${errors.password}`)}</Tooltip>}
-                      show={errors.password}
+                      show={!!touched.password && errors.password}
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.password && 'is-invalid'
-                        || errors.registration && 'is-invalid'}
+                        className={!!touched.password && (errors.password && 'is-invalid' || errors.registration && 'is-invalid')}
                         type="password"
                         placeholder={t('user.password')}
                         value={values.password}
                         onChange={handleChange}
-                        required
+                        onBlur={handleBlur}
                         autoComplete="off"
+                        required
                       />
                     </OverlayTrigger>
                     <Form.Label>{t('user.password')}</Form.Label>
@@ -115,18 +117,18 @@ const Signup = () => {
                       placement="bottom-start"
                       overlay={<Tooltip className="custom-tooltip tooltip" >{errors.confirmPassword && t(`errors.${errors.confirmPassword}`)
                         || errors.registration && t(`errors.${errors.registration}`)}</Tooltip>}
-                      show={errors.confirmPassword || errors.registration}
+                      show={!!touched.confirmPassword && (errors.confirmPassword || errors.registration)}
                       trigger='focus'
                     >
                       <Form.Control
-                        className={errors.confirmPassword && 'is-invalid' 
-                        || errors.registration && 'is-invalid'}
+                        className={!!touched.confirmPassword && (errors.confirmPassword && 'is-invalid' || errors.registration && 'is-invalid')}
                         type="password"
                         placeholder={t('user.confirmPassword')}
                         value={values.confirmPassword}
                         onChange={handleChange}
-                        required
+                        onBlur={handleBlur}
                         autoComplete="off"
+                        required
                       />
                      </OverlayTrigger>
                     <Form.Label>{t('user.confirmPassword')}</Form.Label>
