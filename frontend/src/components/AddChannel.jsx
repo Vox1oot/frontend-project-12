@@ -75,7 +75,7 @@ const AddChannel = ({ socket }) => {
                 onChange={handleChange}
                 disabled={isSubmitting}
                 />
-                <Form.Label className="visually-hidden" for="channelName">Имя канала</Form.Label>
+                <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
             </Form.Group>
             <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName && t(`errors.${errors.channelName}`)}</Alert>
           </Modal.Body>
