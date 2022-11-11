@@ -69,12 +69,13 @@ const AddChannel = ({ socket }) => {
                 id="channelName"
                 type="text"
                 value={values.channelName}
-                /* placeholder={t('channels.typeChannelName')} */
+                placeholder={t('channels.typeChannelName')}
                 autoComplete="off"
                 autoFocus
                 onChange={handleChange}
                 disabled={isSubmitting}
                 />
+                <Form.Label className="visually-hidden" for="channelName">Имя канала</Form.Label>
             </Form.Group>
             <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName && t(`errors.${errors.channelName}`)}</Alert>
           </Modal.Body>
