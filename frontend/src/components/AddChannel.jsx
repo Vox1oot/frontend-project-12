@@ -69,7 +69,7 @@ const AddChannel = ({ socket }) => {
                 id="channelName"
                 type="text"
                 value={values.channelName}
-                placeholder={t('channels.typeChannelName')}
+                /* placeholder={t('channels.typeChannelName')} */
                 autoComplete="off"
                 autoFocus
                 onChange={handleChange}
@@ -82,8 +82,8 @@ const AddChannel = ({ socket }) => {
             <Button type="button" variant="secondary" onClick={toggleModal} disabled={isSubmitting}>
             {t('buttons.cancel')}
             </Button>
-            <Button type="submit" variant="success" disabled={!isValid || isSubmitting}>
-            {t('buttons.add')}
+            <Button type="submit" variant="primary" disabled={!isValid || isSubmitting}>
+            {t('buttons.send')}
             </Button>
           </Modal.Footer>
         </Form>
