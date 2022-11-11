@@ -31,7 +31,7 @@ const Channels = ({ socket }) => {
           active={currentChannelId == channel.id}
           onClick={handleActiveChannel}
         >
-        {`# ${channel.name}`}
+          <span className="me-1">#</span>{channel.name}
         </Button>
 
         {channel.removable && 
