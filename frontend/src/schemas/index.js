@@ -21,7 +21,6 @@ export const registartionSchema = yup.object().shape({
 
 export const channelSchema = yup.object().shape({
   channelName: yup.string()
-    .matches(/^[a-zа-я\d]+$/gi, 'onlyNumAndLetters')
     .min(3, 'min3')
     .max(20,'max')
     .required('required'),
