@@ -21,39 +21,40 @@ const AddChannel = ({ socket }) => {
   const [showModal, setShowModal] = useState();
   const { channels } = useSelector((state) => state.channels);
 
-  const toggleModal = () => {
-    resetForm();
-    return setShowModal(!showModal);
-  }
-
-  const { values, handleChange, handleSubmit, errors, isValid, resetForm, isSubmitting, setSubmitting } = useFormik({
+  const formik = useFormik({
     initialValues: {
       channelName: '',
     },
     validationSchema: channelSchema,
-    onSubmit: ({ channelName }, actions ) => {
+    onSubmit: ({ channelName }, actions) => {
       if (isExistsChannelName(channels, channelName)) {
         actions.setFieldError('channelName', 'uniq');
       } else {
         socket.emit('newChannel', { name: channelName }, ({ status }) => {
           if (status) {
-            toggleModal();
+            setShowModal(!showModal);
+            formik.resetForm();
             toastSuccess(t('toasts.add'));
           }
         });
       }
-    }
+    },
   });
 
+  const toggleModal = () => {
+    formik.resetForm();
+    setShowModal(!showModal);
+  };
+
   useEffect(() => {
-    if (isSubmitting) {
-      const toggle = unlockElementWithDelay(setSubmitting, 3000);
+    if (formik.isSubmitting) {
+      const toggle = unlockElementWithDelay(formik.setSubmitting, 3000);
       toggle(false);
     }
-  }, [isSubmitting, setSubmitting]);
+  }, [formik.isSubmitting, formik.setSubmitting]);
 
   return (
-    <> 
+    <>
       <Button variant="outline-success" size="sm" onClick={toggleModal}>
         +
       </Button>
@@ -61,30 +62,30 @@ const AddChannel = ({ socket }) => {
         <Modal.Header closeButton>
           <Modal.Title>{t('channels.addChannel')}</Modal.Title>
         </Modal.Header>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
           <Modal.Body>
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3">
               <Form.Control
-                className={ errors.channelName && 'form-control is-invalid' }
+                className={formik.errors.channelName && 'form-control is-invalid'}
                 id="channelName"
                 type="text"
-                value={values.channelName}
+                value={formik.values.channelName}
                 placeholder={t('channels.typeChannelName')}
                 autoComplete="off"
                 autoFocus
-                onChange={handleChange}
-                disabled={isSubmitting}
-                />
-                <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
+                onChange={formik.handleChange}
+                disabled={formik.isSubmitting}
+              />
+              <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
             </Form.Group>
-            <Alert show={ !!errors.channelName } variant='danger'>{errors.channelName && t(`errors.${errors.channelName}`)}</Alert>
+            <Alert show={!!formik.errors.channelName} variant="danger">{formik.errors.channelName && t(`errors.${formik.errors.channelName}`)}</Alert>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="button" variant="secondary" onClick={toggleModal} disabled={isSubmitting}>
-            {t('buttons.cancel')}
+            <Button type="button" variant="secondary" onClick={toggleModal} disabled={formik.isSubmitting}>
+              {t('buttons.cancel')}
             </Button>
-            <Button type="submit" variant="primary" disabled={!isValid || isSubmitting}>
-            {t('buttons.send')}
+            <Button type="submit" variant="primary" disabled={!formik.isValid || formik.isSubmitting}>
+              {t('buttons.send')}
             </Button>
           </Modal.Footer>
         </Form>
