@@ -17,12 +17,12 @@ export const registartionSchema = yup.object().shape({
     .max(20, 'max')
     .required('required'),
   confirmPassword: yup.string().required('required').oneOf([yup.ref('password'), null], 'match'),
-})
+});
 
 export const channelSchema = yup.object().shape({
   channelName: yup.string()
     .min(3, 'min3')
-    .max(20,'max')
+    .max(20, 'max')
     .required('required'),
 });
 
