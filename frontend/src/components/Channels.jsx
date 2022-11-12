@@ -6,7 +6,7 @@ import { changeChannel } from '../redux/slices/channelsSlice.js';
 import { DeleteChannel } from "./DeleteChannel.jsx";
 import { RenameChannel } from "./RenameChannel.jsx";
 
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Channels = ({ socket }) => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
@@ -22,27 +22,32 @@ const Channels = ({ socket }) => {
 
   return (
     channels.map((channel, index) => (
-      <ButtonGroup className="w-100" key={index}>
+      <li className="nav-item w-100" key={index}>
+        <Dropdown className="w-100" as={ButtonGroup}>
         <Button
-          className='btn-channel text-truncate text-start'
+          className='br-0 btn-channel text-truncate text-start br-0"'
           variant="light" 
-          id={channel.id} 
+          id={channel.id}
           active={currentChannelId == channel.id}
           onClick={handleActiveChannel}
-        >
-          <span className="me-1">#</span>{channel.name}
-        </Button>
-
-        {channel.removable && 
-        <DropdownButton  as={ButtonGroup} title="" id="bg-nested-dropdown" variant="light">
+          >
+            <span className="me-1">#</span>{channel.name}
+          </Button>
+        
+        {channel.removable &&
+        <Dropdown.Toggle className="br-0" split variant="light" id="dropdown-split-basic" >
+          <span className="visually-hidden">Управление каналом</span>
+        </Dropdown.Toggle>
+        }
+        
+        <Dropdown.Menu>
           <DeleteChannel socket={socket} id={channel.id} />
           <RenameChannel socket={socket} id={channel.id} />
-          <span className="visually-hidden">Управление каналом</span>
-        </DropdownButton>}
-      </ButtonGroup>
+        </Dropdown.Menu>
+      </Dropdown>
+      </li>
     ))
   );
-
 };
 
 export default Channels;

@@ -1,3 +1,7 @@
+.br-0 {
+  border-radius: 0;
+}
+
 .btn-channel {
   text-align: left;
 }
@@ -23,5 +27,4 @@
     border-radius: 1px;
   }
 }
-
 
