@@ -6,16 +6,13 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+import { I18nextProvider } from 'react-i18next';
+import i18Instance from './i18n/index.js';
 
 import App from './App';
 import store from './redux/index.js';
 import './styles/style.css';
 
-// i18next
-import { I18nextProvider } from 'react-i18next';
-import i18Instance from './i18n/index.js';
-
-//rollbar
 const rollbarConfig = {
   enabled: true,
   // eslint-disable-next-line no-undef
@@ -34,5 +31,5 @@ root.render(
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>
-  </Provider>
+  </Provider>,
 );
