@@ -9,7 +9,7 @@ import { toastWarning } from '../toasts/index.js';
 
 import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
 
-export const DeleteChannel = ({ socket, id }) => {
+const DeleteChannel = ({ socket, id }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -33,13 +33,13 @@ export const DeleteChannel = ({ socket, id }) => {
       const toggle = unlockElementWithDelay(setSubmitting, 3000);
       toggle(false);
     }
-  }, [isSubmitting])
+  }, [isSubmitting]);
 
   return (
     <>
-    <Dropdown.Item eventKey="1" onClick={toggleModal}>
+      <Dropdown.Item eventKey="1" onClick={toggleModal}>
         {t('buttons.delete')}
-    </Dropdown.Item>
+      </Dropdown.Item>
 
       <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
@@ -57,4 +57,6 @@ export const DeleteChannel = ({ socket, id }) => {
       </Modal>
     </>
   );
-}
+};
+
+export default DeleteChannel;

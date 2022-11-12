@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useTranslation } from 'react-i18next'
-import filter  from 'leo-profanity';
+import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -12,7 +12,7 @@ const LanguageSwitcher = () => {
   const toggleLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLanguage(lng);
-  }
+  };
 
   return (
     <Dropdown className="d-flex flex-row-reverse m-3">
@@ -26,6 +26,6 @@ const LanguageSwitcher = () => {
       </Dropdown.Menu>
     </Dropdown>
   );
-}
+};
 
 export default LanguageSwitcher;

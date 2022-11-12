@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 
+import filter from 'leo-profanity';
 import useAuthContext from '../hooks/index.jsx';
-
-import filter  from 'leo-profanity';
 
 import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
 
@@ -23,8 +22,8 @@ const InputMessage = ({ socket }) => {
     e.preventDefault();
     setSend(true);
 
-    socket.emit('newMessage', { 
-      body: filter.clean(message), 
+    socket.emit('newMessage', {
+      body: filter.clean(message),
       channelId,
       username: useAuth.data.username,
     }, ({ status }) => {
@@ -35,7 +34,7 @@ const InputMessage = ({ socket }) => {
     });
   };
 
-   const handleMessage = (e) => {
+  const handleMessage = (e) => {
     const text = e.target.value;
     setMessage(text);
   };
@@ -66,7 +65,7 @@ const InputMessage = ({ socket }) => {
             autoComplete="off"
           />
           <Button id="b-send" type="submit" variant="primary" disabled={isSend}>
-          {t('buttons.send')}
+            {t('buttons.send')}
           </Button>
         </InputGroup>
       </Form.Group>
