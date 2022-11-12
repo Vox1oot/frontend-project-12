@@ -44,7 +44,7 @@ export default {
     toasts: {
       add: 'Канал создан',
       rename: 'Канал переименован',
-      delete: 'Канал удален',
+      delete: 'Канал удалён',
     },
     notFoundPage: 'Страница не найдена',
     canGoTo: 'Но вы можете перейти',
