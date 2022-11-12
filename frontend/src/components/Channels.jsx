@@ -25,7 +25,7 @@ const Channels = ({ socket }) => {
       <li className="nav-item w-100" key={index}>
         <Dropdown className="w-100" as={ButtonGroup}>
           <Button
-            className='br-0 btn-channel text-truncate text-start br-0"'
+            className="w-100 br-0 btn-channel text-truncate text-start"
             variant="light"
             id={channel.id}
             active={currentChannelId === channel.id}

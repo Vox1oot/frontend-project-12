@@ -5,7 +5,7 @@ const ChatInfo = () => {
   const { t } = useTranslation();
   const { channels, currentChannelId } = useSelector((state) => state.channels);
   const messages = useSelector((state) => state.messages);
-  const channel = channels.find((channel) => channel.id == currentChannelId);
+  const channel = channels.find(({ id }) => id === currentChannelId);
 
   const countMessages = messages.filter(({ channelId }) => channelId === currentChannelId).length;
 
@@ -14,7 +14,7 @@ const ChatInfo = () => {
       <p className="m-0">
         <b>{channel ? `# ${channel.name}` : ''}</b>
       </p>
-      <span className="text-muted">{`${countMessages} ${t('messages')}`}</span> 
+      <span className="text-muted">{`${countMessages} ${t('messages')}`}</span>
     </div>
   );
 };
