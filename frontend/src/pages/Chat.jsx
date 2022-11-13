@@ -1,28 +1,27 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
 import useAuthContext from '../hooks/index.jsx';
 import fetchAuthorizationData from '../redux/thunk.js';
 
 import InputMessages from '../components/InputMessage';
-import Channels from "../components/Channels.jsx";
-import ChatInfo from "../components/ChatInfo.jsx";
-import Messages from "../components/Messages.jsx";
-import AddChannel from "../components/AddChannel";
+import Channels from '../components/Channels.jsx';
+import ChatInfo from '../components/ChatInfo.jsx';
+import Messages from '../components/Messages.jsx';
+import AddChannel from '../components/AddChannel';
 
 import Nav from '../components/Nav';
 
-import { useTranslation } from 'react-i18next';
+import { addMessage } from '../redux/slices/messagesSlice.js';
+import { addChannel, deleteChannel, renameChannel } from '../redux/slices/channelsSlice.js';
 
-import { addMessage } from "../redux/slices/messagesSlice.js";
-import { addChannel, deleteChannel, renameChannel } from "../redux/slices/channelsSlice.js";
-
-//?
-import { ToastContainer } from 'react-toastify';
+// ?
 
 const Chat = ({ socket }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { data }= useAuthContext();
+  const { data } = useAuthContext();
 
   socket.removeAllListeners();
 
@@ -49,7 +48,7 @@ const Chat = ({ socket }) => {
 
   return (
     <>
-      <Nav button={true}/>
+      <Nav button />
       <div className="container h-100 my-4 overflow-hidden rounded shadow">
         <div className="row h-100 bg-white flex-md-row">
           <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
@@ -77,7 +76,7 @@ const Chat = ({ socket }) => {
       <ToastContainer />
     </>
 
-  )
+  );
 };
 
 export default Chat;
