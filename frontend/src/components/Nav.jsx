@@ -1,6 +1,6 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, Link } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
 
 const Nav = ({ button }) => {

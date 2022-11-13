@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
