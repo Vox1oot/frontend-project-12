@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import fetchAuthorizationData from '../thunk.js';
 
@@ -16,7 +17,7 @@ const channelsSlice = createSlice({
     },
     deleteChannel: (state, { payload }) => {
       const index = findIndex(state.channels, payload.id);
-      index !== -1 ? state.channels.splice(index, 1) : new Error(`could not find a channel with current id: ${payload.id}`);
+      state.channels.splice(index, 1);
       state.currentChannelId = 1;
     },
     renameChannel: (state, { payload }) => {
