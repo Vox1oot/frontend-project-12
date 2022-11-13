@@ -10,7 +10,7 @@ const Nav = ({ button }) => {
   const logout = () => {
     localStorage.clear();
     navigate('/login');
-  }
+  };
 
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
@@ -19,7 +19,7 @@ const Nav = ({ button }) => {
         {button && <Button type="button" onClick={logout}>{t('buttons.logout')}</Button>}
       </div>
     </nav>
-  )
+  );
 };
 
 export default Nav;

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { changeChannel } from '../redux/slices/channelsSlice.js';
 import DeleteChannel from './DeleteChannel.jsx';
-import { RenameChannel } from './RenameChannel.jsx';
+import RenameChannel from './RenameChannel.jsx';
 
 const Channels = ({ socket }) => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
