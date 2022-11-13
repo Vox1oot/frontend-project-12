@@ -1,9 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import Nav from '../components/Nav';
-import LanguageSwitcher from '../components/LanguageSwitcher';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -12,16 +9,18 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { useFormik } from 'formik';
 import axios from 'axios';
 
-//import schema from '../schemas/index.js';
-import useAuthContext from '../hooks/index.jsx';
+// import schema from '../schemas/index.js';
 
 import { useTranslation } from 'react-i18next';
 
 import { useRollbar } from '@rollbar/react';
 
-import { toastError  } from '../toasts/index.js';
-
 import { ToastContainer } from 'react-toastify';
+import { toastError } from '../toasts/index.js';
+
+import useAuthContext from '../hooks/index.jsx';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import Nav from '../components/Nav';
 
 const Login = () => {
   const rollbar = useRollbar();
@@ -30,39 +29,41 @@ const Login = () => {
   const inputUserName = useRef(null);
   const useAuth = useAuthContext();
 
-  const { values, handleChange, handleSubmit, errors, isValid, isSubmitting } = useFormik({
-      initialValues: {
-        username: '',
-        password: '',
-      },
-      /* validationSchema: schema, */
-      onSubmit: async ({ username, password }, actions) => {
-        try {
-          const { data } = await axios.post('/api/v1/login', {
-            username,
-            password,
-          });
+  const {
+    values, handleChange, handleSubmit, errors, isValid, isSubmitting,
+  } = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    /* validationSchema: schema, */
+    onSubmit: async ({ username, password }, actions) => {
+      try {
+        const { data } = await axios.post('/api/v1/login', {
+          username,
+          password,
+        });
 
-          if (data.token) {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.username);
-            useAuth.setUserData(data);
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.username);
+          useAuth.setUserData(data);
 
-            navigate('/');
-          }
-        } catch (error) {
-          rollbar.error('Login error', error);
-
-          if (error.code === "ERR_NETWORK") {
-            toastError(t('errors.network'));
-          }
-
-          if (error.response.status === 401) {
-            actions.setFieldError('authentication', 'auth');
-          }
+          navigate('/');
         }
-      },
-    });
+      } catch (error) {
+        rollbar.error('Login error', error);
+
+        if (error.code === 'ERR_NETWORK') {
+          toastError(t('errors.network'));
+        }
+
+        if (error.response.status === 401) {
+          actions.setFieldError('authentication', 'auth');
+        }
+      }
+    },
+  });
 
   useEffect(() => {
     inputUserName.current.focus();
@@ -85,29 +86,29 @@ const Login = () => {
                   />
                 </div>
 
-                <Form className='col-12 col-md-6 mt-3 mt-mb-0' onSubmit={handleSubmit}>
+                <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={handleSubmit}>
                   <h1 className="text-center mb-4">{t('signIn')}</h1>
-                  <Form.Group className="form-floating mb-3" controlId="username" >
-                      <Form.Control
-                        className={errors.authentication && 'is-invalid'}
-                        type="text"
-                        value={values.username}
-                        onChange={handleChange}
-                        placeholder={t('user.nickname')}
-                        required
-                        autoComplete="off"
-                        autoFocus
-                        ref={inputUserName}
-                      />
+                  <Form.Group className="form-floating mb-3" controlId="username">
+                    <Form.Control
+                      className={errors.authentication && 'is-invalid'}
+                      type="text"
+                      value={values.username}
+                      onChange={handleChange}
+                      placeholder={t('user.nickname')}
+                      required
+                      autoComplete="off"
+                      autoFocus
+                      ref={inputUserName}
+                    />
                     <Form.Label>{t('user.nickname')}</Form.Label>
                   </Form.Group>
 
-                  <Form.Group className="form-floating mb-3" controlId="password" >
+                  <Form.Group className="form-floating mb-3" controlId="password">
                     <OverlayTrigger
                       placement="bottom-start"
-                      overlay={<Tooltip className="custom-tooltip tooltip" >{errors.authentication && t(`errors.${errors.authentication}`)}</Tooltip>}
+                      overlay={<Tooltip className="custom-tooltip tooltip">{errors.authentication && t(`errors.${errors.authentication}`)}</Tooltip>}
                       show={errors.authentication}
-                      trigger='focus'
+                      trigger="focus"
                     >
                       <Form.Control
                         className={errors.authentication && 'is-invalid'}
@@ -135,7 +136,10 @@ const Login = () => {
               </div>
               <div className="card-footer p-4">
                 <div className="text-center">
-                  <span>{t('questions.haveAccount')} </span>
+                  <span>
+                    {t('questions.haveAccount')}
+                    {' '}
+                  </span>
                   <Link to="/signup">{t('registration')}</Link>
                 </div>
               </div>
