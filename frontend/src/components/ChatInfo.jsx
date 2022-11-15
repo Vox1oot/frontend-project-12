@@ -15,7 +15,7 @@ const ChatInfo = () => {
       <p className="m-0">
         <b>{channel ? `# ${channel.name}` : ''}</b>
       </p>
-      <span className="text-muted">{`${countMessages} ${t('messages')}`}</span>
+      <span className="text-muted">{`${t('message.message', { count: countMessages })}`}</span>
     </div>
   );
 };
