@@ -132,12 +132,11 @@ const Login = () => {
                     {t('buttons.logon')}
                   </Button>
                 </Form>
-
               </div>
               <div className="card-footer p-4">
                 <div className="text-center">
                   <span>
-                    {t('questions.haveAccount')}
+                    {t('questions.noAccount')}
                     {' '}
                   </span>
                   <Link to="/signup">{t('registration')}</Link>

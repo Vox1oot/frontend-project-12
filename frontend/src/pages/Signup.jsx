@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useRollbar } from '@rollbar/react';
@@ -144,7 +144,15 @@ const Signup = () => {
                     {t('buttons.registration')}
                   </Button>
                 </Form>
-
+              </div>
+              <div className="card-footer p-4">
+                <div className="text-center">
+                  <span>
+                    {t('questions.haveAccount')}
+                    {' '}
+                  </span>
+                  <Link to="/login">{t('logIn')}</Link>
+                </div>
               </div>
             </div>
           </div>

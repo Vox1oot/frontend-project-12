@@ -26,7 +26,8 @@ export default {
     },
     questions: {
       areYouSure: 'Are you sure?',
-      haveAccount: 'New to chat?',
+      noAccount: 'New to chat?',
+      haveAccount: 'Do you have an account?',
     },
     errors: {
       required: 'This field is required',
@@ -50,6 +51,7 @@ export default {
     canGoTo: 'you can go to',
     linkToMain: 'main page',
     signIn: 'Sign in',
+    logIn: 'Log in',
     registration: 'Registration',
     typeMessage: 'Type your message here',
     messages: 'messages',
