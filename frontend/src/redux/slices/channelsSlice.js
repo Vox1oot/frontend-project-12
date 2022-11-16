@@ -17,8 +17,9 @@ const channelsSlice = createSlice({
     },
     deleteChannel: (state, { payload }) => {
       const index = findIndex(state.channels, payload.id);
+      const { id: idToBeDeletedChannel } = state.channels[index];
 
-      if (index === state.currentChannelId) {
+      if (idToBeDeletedChannel === state.currentChannelId) {
         state.currentChannelId = 1;
       }
 

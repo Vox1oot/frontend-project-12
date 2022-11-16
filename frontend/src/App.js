@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
@@ -10,23 +10,8 @@ import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
 import Signup from './pages/Signup';
 
-import Context from './context/index.jsx';
 import useAuthContext from './hooks/index.jsx';
-
-const MainProvider = ({ children }) => {
-  const [userData, setUserData] = useState({
-    token: localStorage.getItem('token'),
-    username: localStorage.getItem('username'),
-  });
-
-  const memo = useMemo(() => ({ data: userData, setUserData }), [userData]);
-
-  return (
-    <Context.Provider value={memo}>
-      {children}
-    </Context.Provider>
-  );
-};
+import MainProvider from './context/MainProvider';
 
 const PrivateRoute = ({ children }) => {
   const authContext = useAuthContext();
