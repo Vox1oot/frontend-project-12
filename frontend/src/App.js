@@ -15,9 +15,7 @@ import MainProvider from './context/MainProvider';
 
 const PrivateRoute = ({ children }) => {
   const authContext = useAuthContext();
-
-  const { token } = authContext.data;
-  return token ? children : <Navigate to="/login" />;
+  return authContext.data ? children : <Navigate to="/login" />;
 };
 
 const socket = io();

@@ -35,8 +35,7 @@ const Signup = () => {
         const { data } = await axios.post('/api/v1/signup', { username, password });
 
         if (data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('username', data.username);
+          localStorage.setItem('user', { username: data.username, token: data.token });
           useAuth.setUserData(data);
 
           navigate('/');

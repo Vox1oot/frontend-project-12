@@ -2,10 +2,9 @@ import React, { useState, useMemo } from 'react';
 import Context from './index.jsx';
 
 const MainProvider = ({ children }) => {
-  const [userData, setUserData] = useState({
-    token: localStorage.getItem('token'),
-    username: localStorage.getItem('username'),
-  });
+  const [userData, setUserData] = useState(localStorage.getItem('user'));
+
+  console.log(userData);
 
   const memo = useMemo(() => ({ data: userData, setUserData }), [userData]);
 

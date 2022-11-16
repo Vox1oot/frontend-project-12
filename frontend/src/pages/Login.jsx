@@ -36,7 +36,6 @@ const Login = () => {
       username: '',
       password: '',
     },
-    /* validationSchema: schema, */
     onSubmit: async ({ username, password }, actions) => {
       try {
         const { data } = await axios.post('/api/v1/login', {
@@ -45,8 +44,7 @@ const Login = () => {
         });
 
         if (data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('username', data.username);
+          localStorage.setItem('user', { username: data.username, token: data.token });
           useAuth.setUserData(data);
 
           navigate('/');
