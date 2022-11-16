@@ -39,13 +39,15 @@ const InputMessage = ({ socket }) => {
     setMessage(text);
   };
 
+  console.log(channelId);
+
   useEffect(() => {
     if (isSend) {
       const toggle = unlockElementWithDelay(setSend, 3000);
       toggle(false);
     }
     input.current.focus();
-  }, [isSend]);
+  }, [isSend, channelId]);
 
   return (
     <Form onSubmit={handleSubmit}>

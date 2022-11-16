@@ -1,12 +1,16 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const Messages = () => {
-  const currentChannelID = useSelector(
-    (state) => state.channels.currentChannelId,
-  );
+  const currentChannelID = useSelector((state) => state.channels.currentChannelId);
   const messages = useSelector((state) => state.messages);
+
+  useEffect(() => {
+    const messagesBox = document.getElementById('messages-box');
+    const scHeight = messagesBox.scrollHeight;
+    messagesBox.scrollTop = scHeight;
+  });
 
   return messages
     .filter(({ channelId }) => channelId === currentChannelID)
