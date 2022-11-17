@@ -13,33 +13,10 @@ import AddChannel from '../components/AddChannel';
 
 import Nav from '../components/Nav';
 
-import { addMessage } from '../redux/slices/messagesSlice.js';
-import { addChannel, deleteChannel, renameChannel } from '../redux/slices/channelsSlice.js';
-
-// ?
-
 const Chat = ({ socket }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data } = useAuthContext();
-
-  socket.removeAllListeners();
-
-  socket.on('newMessage', (payload) => {
-    dispatch(addMessage(payload));
-  });
-
-  socket.on('newChannel', (payload) => {
-    dispatch(addChannel(payload));
-  });
-
-  socket.on('removeChannel', (payload) => {
-    dispatch(deleteChannel(payload));
-  });
-
-  socket.on('renameChannel', (payload) => {
-    dispatch(renameChannel(payload));
-  });
 
   useEffect(() => {
     const { token } = data;
