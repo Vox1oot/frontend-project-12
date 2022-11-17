@@ -14,19 +14,18 @@ const InputMessage = () => {
   const [message, setMessage] = useState('');
   const [isSend, setSend] = useState(false);
 
-  const addNewMessage = useSocketContext();
-
-  const channelId = useSelector((state) => state.channels.currentChannelId);
+  const { addNewMessage } = useSocketContext();
   const useAuth = useAuthContext();
   const input = useRef();
+
+  const channelId = useSelector((state) => state.channels.currentChannelId);
+  const { username } = useAuth.data;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSend(true);
 
     const body = filter.clean(message);
-    const { username } = useAuth.data;
-
     const props = { body, channelId, username };
 
     const resolve = () => {

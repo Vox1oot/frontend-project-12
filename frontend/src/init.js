@@ -40,6 +40,14 @@ const runApp = () => {
     });
   };
 
+  const addNewChannel = (props, resolve) => {
+    socket.emit('newMessage', props, ({ status }) => {
+      if (status) {
+        resolve();
+      }
+    });
+  };
+
   const rollbarConfig = {
     enabled: true,
     // eslint-disable-next-line no-undef
@@ -54,7 +62,7 @@ const runApp = () => {
       <RollbarProvider config={rollbarConfig}>
         <ErrorBoundary>
           <I18nextProvider i18n={i18Instance}>
-            <SocketContext.Provider value={addNewMessage}>
+            <SocketContext.Provider value={{ addNewMessage, addNewChannel }}>
               <App />
             </SocketContext.Provider>
           </I18nextProvider>

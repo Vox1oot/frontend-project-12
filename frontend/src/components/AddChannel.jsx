@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
-
 import { useTranslation } from 'react-i18next';
+import { useSocketContext } from '../hooks/index.js';
 
 import { channelSchema } from '../schemas/index.js';
 import isExistsChannelName from '../utils/isExistsChannelName.js';
@@ -16,10 +16,11 @@ import toastSuccess from '../toasts/index.js';
 
 import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
 
-const AddChannel = ({ socket }) => {
+const AddChannel = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState();
   const { channels } = useSelector((state) => state.channels);
+  const { addNewChannel } = useSocketContext();
 
   const formik = useFormik({
     initialValues: {
@@ -29,15 +30,15 @@ const AddChannel = ({ socket }) => {
     onSubmit: ({ channelName }, actions) => {
       if (isExistsChannelName(channels, channelName)) {
         actions.setFieldError('channelName', 'uniq');
-      } else {
-        socket.emit('newChannel', { name: channelName }, ({ status }) => {
-          if (status) {
-            setShowModal(!showModal);
-            formik.resetForm();
-            toastSuccess(t('toasts.add'));
-          }
-        });
       }
+
+      const resolve = () => {
+        setShowModal(!showModal);
+        formik.resetForm();
+        toastSuccess(t('toasts.add'));
+      };
+
+      addNewChannel({ name: channelName }, resolve);
     },
   });
 
