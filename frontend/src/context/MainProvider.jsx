@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import Context from './index.jsx';
+import Context from './index.js';
 
 const MainProvider = ({ children }) => {
   const [userData, setUserData] = useState({

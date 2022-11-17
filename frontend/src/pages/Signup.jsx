@@ -9,7 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useRollbar } from '@rollbar/react';
-import useAuthContext from '../hooks/index.jsx';
+import useAuthContext from '../hooks/index.js';
 
 import { registartionSchema } from '../schemas/index.js';
 

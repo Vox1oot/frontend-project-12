@@ -18,7 +18,7 @@ import { useRollbar } from '@rollbar/react';
 import { ToastContainer } from 'react-toastify';
 import { toastError } from '../toasts/index.js';
 
-import useAuthContext from '../hooks/index.jsx';
+import useAuthContext from '../hooks/index.js';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import Nav from '../components/Nav';
 

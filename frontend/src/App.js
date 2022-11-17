@@ -1,5 +1,3 @@
-import { io } from 'socket.io-client';
-
 import React from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes,
@@ -10,7 +8,7 @@ import Login from './pages/Login';
 import NotFoundPage from './pages/notFoundPage';
 import Signup from './pages/Signup';
 
-import useAuthContext from './hooks/index.jsx';
+import useAuthContext from './hooks/index.js';
 import MainProvider from './context/MainProvider';
 
 const PrivateRoute = ({ children }) => {
@@ -20,8 +18,6 @@ const PrivateRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" />;
 };
 
-const socket = io();
-
 const App = () => (
   <MainProvider>
     <BrowserRouter>
@@ -30,7 +26,7 @@ const App = () => (
           path="/"
           element={(
             <PrivateRoute>
-              <Chat socket={socket} />
+              <Chat />
             </PrivateRoute>
             )}
         />
