@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import useAuthContext from '../hooks/index.jsx';
+import useAuthContext from '../hooks/index.js';
 import fetchAuthorizationData from '../redux/thunk.js';
 
 import InputMessages from '../components/InputMessage';
@@ -13,7 +13,7 @@ import AddChannel from '../components/AddChannel';
 
 import Nav from '../components/Nav';
 
-const Chat = ({ socket }) => {
+const Chat = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data } = useAuthContext();
@@ -31,10 +31,10 @@ const Chat = ({ socket }) => {
           <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
             <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
               <span>{t('channels.channels')}</span>
-              <AddChannel socket={socket} />
+              <AddChannel />
             </div>
             <ul className="nav flex-column nav-pills nav-fill px-2">
-              <Channels socket={socket} />
+              <Channels />
             </ul>
           </div>
           <div className="col p-0 h-100">
@@ -44,7 +44,7 @@ const Chat = ({ socket }) => {
                 <Messages />
               </div>
               <div className="mt-auto px-5 py-3">
-                <InputMessages socket={socket} />
+                <InputMessages />
               </div>
             </div>
           </div>
@@ -52,7 +52,6 @@ const Chat = ({ socket }) => {
       </div>
       <ToastContainer />
     </>
-
   );
 };
 
