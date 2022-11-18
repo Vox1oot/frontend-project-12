@@ -28,15 +28,16 @@ const AddChannel = () => {
     },
     validationSchema: channelSchema,
     onSubmit: ({ channelName }, actions) => {
-      if (isExistsChannelName(channels, channelName)) {
-        actions.setFieldError('channelName', 'uniq');
-      }
-
       const resolve = () => {
         setShowModal(!showModal);
         formik.resetForm();
         toastSuccess(t('toasts.add'));
       };
+
+      if (isExistsChannelName(channels, channelName)) {
+        actions.setFieldError('channelName', 'uniq');
+        return;
+      }
 
       addNewChannel({ name: channelName }, resolve);
     },

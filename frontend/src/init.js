@@ -21,6 +21,7 @@ const runApp = () => {
   });
 
   socket.on('newChannel', (payload) => {
+    console.log(payload);
     store.dispatch(addChannel(payload));
   });
 
@@ -41,7 +42,23 @@ const runApp = () => {
   };
 
   const addNewChannel = (props, resolve) => {
-    socket.emit('newMessage', props, ({ status }) => {
+    socket.emit('newChannel', props, ({ status }) => {
+      if (status) {
+        resolve();
+      }
+    });
+  };
+
+  const removeChannel = (props, resolve) => {
+    socket.emit('removeChannel', props, ({ status }) => {
+      if (status) {
+        resolve();
+      }
+    });
+  };
+
+  const renameChannelName = (props, resolve) => {
+    socket.emit('renameChannel', props, ({ status }) => {
       if (status) {
         resolve();
       }
@@ -62,7 +79,14 @@ const runApp = () => {
       <RollbarProvider config={rollbarConfig}>
         <ErrorBoundary>
           <I18nextProvider i18n={i18Instance}>
-            <SocketContext.Provider value={{ addNewMessage, addNewChannel }}>
+            <SocketContext.Provider
+              value={{
+                addNewMessage,
+                addNewChannel,
+                removeChannel,
+                renameChannelName,
+              }}
+            >
               <App />
             </SocketContext.Provider>
           </I18nextProvider>

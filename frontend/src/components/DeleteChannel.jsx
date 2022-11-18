@@ -4,28 +4,30 @@ import Modal from 'react-bootstrap/Modal';
 import { Dropdown } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
+import { useSocketContext } from '../hooks/index.js';
 
 import { toastWarning } from '../toasts/index.js';
 
 import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
 
-const DeleteChannel = ({ socket, id }) => {
+const DeleteChannel = ({ id }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
+  const { removeChannel } = useSocketContext();
 
   const toggleModal = () => setShowModal(!showModal);
 
   const deleteChannel = () => {
     setSubmitting(true);
 
-    socket.emit('removeChannel', { id }, ({ status }) => {
-      if (status) {
-        toastWarning(t('toasts.delete'));
-        setSubmitting(false);
-        toggleModal();
-      }
-    });
+    const resolve = () => {
+      toastWarning(t('toasts.delete'));
+      setSubmitting(false);
+      toggleModal();
+    };
+
+    removeChannel({ id }, resolve);
   };
 
   useEffect(() => {

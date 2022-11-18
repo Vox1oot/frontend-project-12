@@ -10,6 +10,7 @@ import { Dropdown } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
 import { channelSchema } from '../schemas/index.js';
+import { useSocketContext } from '../hooks/index.js';
 
 import isExistsChannelName from '../utils/isExistsChannelName.js';
 
@@ -17,10 +18,11 @@ import { toastInfo } from '../toasts/index.js';
 
 import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
 
-const RenameChannel = ({ socket, id }) => {
+const RenameChannel = ({ id }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const { channels } = useSelector((state) => state.channels);
+  const { renameChannelName } = useSocketContext();
 
   const formik = useFormik({
     initialValues: {
@@ -28,17 +30,18 @@ const RenameChannel = ({ socket, id }) => {
     },
     validationSchema: channelSchema,
     onSubmit: ({ channelName }, actions) => {
+      const resolve = () => {
+        formik.resetForm();
+        setShowModal(!showModal);
+        toastInfo(t('toasts.rename'));
+      };
+
       if (isExistsChannelName(channels, channelName)) {
         actions.setFieldError('channelName', 'uniq');
-      } else {
-        socket.emit('renameChannel', { id, name: channelName }, ({ status }) => {
-          if (status) {
-            setShowModal(!showModal);
-            formik.resetForm();
-            toastInfo(t('toasts.rename'));
-          }
-        });
+        return;
       }
+
+      renameChannelName({ id, name: channelName }, resolve);
     },
   });
 

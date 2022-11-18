@@ -25,14 +25,13 @@ const InputMessage = () => {
     e.preventDefault();
     setSend(true);
 
-    const body = filter.clean(message);
-    const props = { body, channelId, username };
-
     const resolve = () => {
       setMessage('');
       setSend(false);
     };
 
+    const body = filter.clean(message);
+    const props = { body, channelId, username };
     addNewMessage(props, resolve);
   };
 
