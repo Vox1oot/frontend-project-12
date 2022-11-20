@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Dropdown from 'react-bootstrap/Dropdown';
-import { changeChannel } from '../redux/slices/channelsSlice.js';
+import { changeChannel } from '../../../redux/slices/channelsSlice.js';
 import DeleteChannel from './DeleteChannel.jsx';
 import RenameChannel from './RenameChannel.jsx';
 

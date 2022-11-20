@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import filter from 'leo-profanity';
-import useAuthContext, { useSocketContext } from '../hooks/index.js';
+import useAuthContext, { useSocketContext } from '../../../hooks/index.js';
 
-import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
+import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
 
 const InputMessage = () => {
   const { t } = useTranslation();

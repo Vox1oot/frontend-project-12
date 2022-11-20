@@ -4,11 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import { Dropdown } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
-import { useSocketContext } from '../hooks/index.js';
+import { useSocketContext } from '../../../hooks/index.js';
 
-import { toastWarning } from '../toasts/index.js';
+import { toastWarning } from '../../toasts/index.js';
 
-import unlockElementWithDelay from '../utils/unlockElementWithDelay.js';
+import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
 
 const DeleteChannel = ({ id }) => {
   const { t } = useTranslation();
