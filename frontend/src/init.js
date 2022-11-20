@@ -16,6 +16,11 @@ import App from './App.js';
 const runApp = () => {
   const socket = io();
 
+  const lng = localStorage.getItem('language');
+  if (lng) {
+    i18Instance.changeLanguage(lng);
+  }
+
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });

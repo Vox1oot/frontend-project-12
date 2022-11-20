@@ -12,6 +12,7 @@ const LanguageSwitcher = () => {
   const toggleLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLanguage(lng);
+    localStorage.setItem('language', lng); /* !! */
   };
 
   return (
