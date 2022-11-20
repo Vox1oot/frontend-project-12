@@ -7,7 +7,7 @@ import { changeChannel } from '../../../redux/slices/channelsSlice.js';
 import DeleteChannel from './DeleteChannel.jsx';
 import RenameChannel from './RenameChannel.jsx';
 
-const Channels = ({ socket }) => {
+const Channels = () => {
   const { channels, currentChannelId } = useSelector((state) => state.channels);
   const dispatch = useDispatch();
 
@@ -43,8 +43,8 @@ const Channels = ({ socket }) => {
         )}
 
           <Dropdown.Menu>
-            <DeleteChannel socket={socket} id={channel.id} />
-            <RenameChannel socket={socket} id={channel.id} />
+            <DeleteChannel id={channel.id} />
+            <RenameChannel id={channel.id} />
           </Dropdown.Menu>
         </Dropdown>
       </li>
