@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -14,10 +14,6 @@ const Channels = () => {
   const handleActiveChannel = (e) => {
     dispatch(changeChannel(Number(e.target.id)));
   };
-
-  useEffect(() => {
-    dispatch(changeChannel(currentChannelId));
-  }, [dispatch, currentChannelId]);
 
   return (
     channels.map((channel, index) => (
