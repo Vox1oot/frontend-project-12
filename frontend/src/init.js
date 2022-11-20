@@ -12,7 +12,7 @@ import store from './redux/index.js';
 import i18Instance from './i18n/index.js';
 
 import App from './App.js';
-
+/* from test!! */
 const runApp = () => {
   const socket = io();
 
