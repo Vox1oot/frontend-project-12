@@ -2,13 +2,16 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import useAuthContext from '../hooks/index.js';
 
 const Nav = ({ button }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const useAuth = useAuthContext();
 
   const logout = () => {
     localStorage.clear();
+    useAuth.setUserData(null);
     navigate('/login');
   };
 

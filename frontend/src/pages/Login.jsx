@@ -65,8 +65,12 @@ const Login = () => {
   });
 
   useEffect(() => {
+    if (useAuth.data) {
+      navigate('/');
+    }
+
     inputUserName.current.focus();
-  }, [errors.authentication]);
+  }, [errors.authentication, useAuth.data, navigate]);
 
   return (
     <>
