@@ -13,6 +13,8 @@ import i18Instance from './i18n/index.js';
 
 import App from './App.js';
 
+/* Test */
+
 const runApp = () => {
   const socket = io();
 
