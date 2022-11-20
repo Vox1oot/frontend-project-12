@@ -1,10 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { channelIdSelector, messagesSelector } from '../../../redux/selectors.js';
 
 const Messages = () => {
-  const currentChannelID = useSelector((state) => state.channels.currentChannelId);
-  const messages = useSelector((state) => state.messages);
+  const currentChannelID = useSelector((state) => channelIdSelector(state));
+  const messages = useSelector((state) => messagesSelector(state));
 
   useEffect(() => {
     const messagesBox = document.getElementById('messages-box');

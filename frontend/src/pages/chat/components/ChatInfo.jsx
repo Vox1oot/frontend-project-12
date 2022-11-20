@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import channelsSelector, { channelIdSelector } from '../../../redux/selectors.js';
 
 const ChatInfo = () => {
   const { t } = useTranslation();
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
+  const channels = useSelector((state) => channelsSelector(state));
+  const currentChannelId = useSelector((state) => channelIdSelector(state));
   const messages = useSelector((state) => state.messages);
   const channel = channels.find(({ id }) => id === currentChannelId);
 

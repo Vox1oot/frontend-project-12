@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import useAuthContext from '../../hooks/index.js';
 import fetchAuthorizationData from '../../redux/thunk.js';
-
 import InputMessages from './components/InputMessage';
 import Channels from './components/Channels.jsx';
 import ChatInfo from './components/ChatInfo.jsx';

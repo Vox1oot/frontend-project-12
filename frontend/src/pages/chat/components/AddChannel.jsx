@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
-
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import { useTranslation } from 'react-i18next';
 import { useSocketContext } from '../../../hooks/index.js';
-
 import { channelSchema } from '../../../schemas/index.js';
 import isExistsChannelName from '../../../utils/isExistsChannelName.js';
 import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
-
+import channelsSelector from '../../../redux/selectors.js';
 import toastSuccess from '../../toasts/index.js';
 
 const AddChannel = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState();
-  const { channels } = useSelector((state) => state.channels);
+  const channels = useSelector((state) => channelsSelector(state));
   const { addNewChannel } = useSocketContext();
 
   const formik = useFormik({

@@ -1,24 +1,21 @@
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useTranslation } from 'react-i18next';
-
 import filter from 'leo-profanity';
+import { channelIdSelector } from '../../../redux/selectors.js';
 import useAuthContext, { useSocketContext } from '../../../hooks/index.js';
-
 import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
 
 const InputMessage = () => {
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const [isSend, setSend] = useState(false);
-
+  const channelId = useSelector((state) => channelIdSelector(state));
   const { addNewMessage } = useSocketContext();
   const useAuth = useAuthContext();
   const input = useRef();
 
-  const channelId = useSelector((state) => state.channels.currentChannelId);
   const { username } = useAuth.data;
 
   const handleSubmit = (e) => {

@@ -1,21 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-
 import { useFormik } from 'formik';
 import axios from 'axios';
-
 import { useTranslation } from 'react-i18next';
-
 import { useRollbar } from '@rollbar/react';
-
 import { ToastContainer } from 'react-toastify';
 import { toastError } from '../toasts/index.js';
-
 import useAuthContext from '../../hooks/index.js';
 import LanguageSwitcher from '../LanguageSwitcher';
 import Nav from '../Nav';
