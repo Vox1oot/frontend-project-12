@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import useAuthContext from '../../hooks/index.js';
@@ -9,18 +9,32 @@ import Channels from './components/Channels.jsx';
 import ChatInfo from './components/ChatInfo.jsx';
 import Messages from './components/Messages.jsx';
 import AddChannel from './components/AddChannel';
+import getModal from '../modals/index.js';
+import { modalSelector } from '../../redux/selectors.js';
 
 import Nav from '../Nav';
+
+const renderModal = (modal) => {
+  if (!modal.isShowing) {
+    return null;
+  }
+
+  const Component = getModal(modal.type);
+  return modal.type === 'adding' ? <Component /> : <Component id={modal.payload} />;
+};
 
 const Chat = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data } = useAuthContext();
+  const modal = useSelector((state) => modalSelector(state));
 
   useEffect(() => {
     const { token } = data;
     dispatch(fetchAuthorizationData(token));
   }, [data, dispatch]);
+
+  console.log(renderModal(modal));
 
   return (
     <>
@@ -49,6 +63,7 @@ const Chat = () => {
           </div>
         </div>
       </div>
+      {renderModal(modal)}
       <ToastContainer />
     </>
   );
