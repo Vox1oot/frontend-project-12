@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useRollbar } from '@rollbar/react';
 import { ToastContainer } from 'react-toastify';
 import { toastError } from '../toasts/index.js';
-import useAuthContext from '../../hooks/index.js';
+import { useAuthContext } from '../../context/index.js';
 import LanguageSwitcher from '../LanguageSwitcher';
 import Nav from '../Nav';
 

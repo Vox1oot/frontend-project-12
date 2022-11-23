@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import { channelIdSelector } from '../../../redux/slices/channelsSlice.js';
-import useAuthContext, { useSocketContext } from '../../../hooks/index.js';
+import { useSocketContext, useAuthContext } from '../../../context/index.js';
 import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
 
 const InputMessage = () => {

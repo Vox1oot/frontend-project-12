@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import NotFoundPage from './pages/notFoundPage';
 import Signup from './pages/signup/Signup';
 
-import useAuthContext from './hooks/index.js';
+import { useAuthContext } from './context/index.js';
 import MainProvider from './context/MainProvider';
 
 const PrivateRoute = ({ children }) => {

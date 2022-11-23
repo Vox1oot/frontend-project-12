@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
-import { useSocketContext } from '../../hooks/index.js';
+import { useSocketContext } from '../../context/index.js';
 import { toastWarning } from '../toasts/index.js';
 import unlockElementWithDelay from '../../utils/unlockElementWithDelay.js';
 import { modalSelector, closeModal } from '../../redux/slices/modalSlice.js';

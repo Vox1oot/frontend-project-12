@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import useAuthContext from '../../hooks/index.js';
+import { useAuthContext } from '../../context/index.js';
 import fetchAuthorizationData from '../../redux/thunk.js';
 import InputMessages from './components/InputMessage';
 import Channels from './components/Channels.jsx';

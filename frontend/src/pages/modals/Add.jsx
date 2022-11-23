@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import { useTranslation } from 'react-i18next';
-import { useSocketContext } from '../../hooks/index.js';
+import { useSocketContext } from '../../context/index.js';
 import { channelSchema } from '../../schemas/index.js';
 import isExistsChannelName from '../../utils/isExistsChannelName.js';
 import unlockElementWithDelay from '../../utils/unlockElementWithDelay.js';
