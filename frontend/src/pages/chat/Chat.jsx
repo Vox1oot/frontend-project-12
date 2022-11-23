@@ -34,8 +34,6 @@ const Chat = () => {
     dispatch(fetchAuthorizationData(token));
   }, [data, dispatch]);
 
-  console.log(renderModal(modal));
-
   return (
     <>
       <Nav button />
