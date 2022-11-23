@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -46,12 +46,6 @@ const Signup = () => {
       }
     },
   });
-
-  useEffect(() => {
-    if (useAuth.data) {
-      navigate('/');
-    }
-  }, [useAuth.data, navigate]);
 
   return (
     <>
