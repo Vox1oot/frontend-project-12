@@ -10,7 +10,7 @@ import ChatInfo from './components/ChatInfo.jsx';
 import Messages from './components/Messages.jsx';
 import AddChannel from './components/AddChannel';
 import getModal from '../modals/index.js';
-import { modalSelector } from '../../redux/selectors.js';
+import { modalSelector } from '../../redux/slices/modalSlice';
 
 import Nav from '../Nav';
 

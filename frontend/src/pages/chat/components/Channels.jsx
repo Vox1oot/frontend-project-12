@@ -2,10 +2,9 @@ import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { changeChannel } from '../../../redux/slices/channelsSlice.js';
+import { changeChannel, channelsSelector, channelIdSelector } from '../../../redux/slices/channelsSlice.js';
 import DeleteChannel from './DeleteChannel.jsx';
 import RenameChannel from './RenameChannel.jsx';
-import channelsSelector, { channelIdSelector } from '../../../redux/selectors.js';
 
 const Channels = () => {
   const channels = useSelector((state) => channelsSelector(state));

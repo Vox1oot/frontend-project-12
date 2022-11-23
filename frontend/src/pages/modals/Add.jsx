@@ -10,8 +10,8 @@ import { useSocketContext } from '../../hooks/index.js';
 import { channelSchema } from '../../schemas/index.js';
 import isExistsChannelName from '../../utils/isExistsChannelName.js';
 import unlockElementWithDelay from '../../utils/unlockElementWithDelay.js';
-import channelsSelector, { modalSelector } from '../../redux/selectors.js';
-import { closeModal } from '../../redux/slices/modalSlice.js';
+import { channelsSelector } from '../../redux/slices/channelsSlice.js';
+import { modalSelector, closeModal } from '../../redux/slices/modalSlice.js';
 import toastSuccess from '../toasts/index.js';
 
 const Add = () => {

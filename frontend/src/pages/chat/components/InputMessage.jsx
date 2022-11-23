@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
-import { channelIdSelector } from '../../../redux/selectors.js';
+import { channelIdSelector } from '../../../redux/slices/channelsSlice.js';
 import useAuthContext, { useSocketContext } from '../../../hooks/index.js';
 import unlockElementWithDelay from '../../../utils/unlockElementWithDelay.js';
 

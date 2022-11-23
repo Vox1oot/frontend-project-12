@@ -6,8 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useSocketContext } from '../../hooks/index.js';
 import { toastWarning } from '../toasts/index.js';
 import unlockElementWithDelay from '../../utils/unlockElementWithDelay.js';
-import { modalSelector } from '../../redux/selectors.js';
-import { closeModal } from '../../redux/slices/modalSlice.js';
+import { modalSelector, closeModal } from '../../redux/slices/modalSlice.js';
 
 const Remove = () => {
   const { t } = useTranslation();
@@ -21,7 +20,6 @@ const Remove = () => {
 
     const resolve = () => {
       toastWarning(t('toasts.delete'));
-      /* setSubmitting(false); */
       dispatch(closeModal());
     };
 
