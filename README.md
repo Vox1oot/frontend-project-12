@@ -5,7 +5,7 @@
 
 ### Go to app -> [Chat (Slack)](https://frontend-project-12-production-3657.up.railway.app/)
 
-### Installation Guide :
+### Installation Guide:
 
 * ```$ git clone: https://github.com/Vox1oot/frontend-project-12.git```
 * ```$ make install```
