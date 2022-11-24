@@ -8,9 +8,11 @@ import InputMessages from './components/InputMessage';
 import Channels from './components/Channels.jsx';
 import ChatInfo from './components/ChatInfo.jsx';
 import Messages from './components/Messages.jsx';
+import Loader from './components/Loader.jsx';
 import AddChannel from './components/AddChannel';
 import getModal from '../modals/index.js';
 import { modalSelector } from '../../redux/slices/modalSlice';
+import { loaderSelector } from '../../redux/slices/loaderSlice.js';
 
 import Nav from '../Nav';
 
@@ -28,11 +30,12 @@ const Chat = () => {
   const dispatch = useDispatch();
   const { data } = useAuthContext();
   const modal = useSelector((state) => modalSelector(state));
+  const loaderState = useSelector((state) => loaderSelector(state));
 
   useEffect(() => {
     const { token } = data;
     dispatch(fetchAuthorizationData(token));
-  }, [data, dispatch]);
+  }, [data, dispatch, loaderState]);
 
   return (
     <>
@@ -63,6 +66,7 @@ const Chat = () => {
       </div>
       {renderModal(modal)}
       <ToastContainer />
+      {loaderState === 'AWAIT' && <Loader />}
     </>
   );
 };

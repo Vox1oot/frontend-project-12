@@ -58,5 +58,6 @@ export default {
     logIn: 'Log in',
     registration: 'Registration',
     typeMessage: 'Type your message here',
+    loading: 'Loading',
   },
 };

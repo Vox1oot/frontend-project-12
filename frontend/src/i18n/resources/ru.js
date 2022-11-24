@@ -59,5 +59,6 @@ export default {
     logIn: 'Войти в систему',
     registration: 'Регистрация',
     typeMessage: 'Введите сообщение',
+    loading: 'Идёт загрузка',
   },
 };
