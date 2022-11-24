@@ -29,8 +29,8 @@ const Chat = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data } = useAuthContext();
-  const modal = useSelector((state) => modalSelector(state));
-  const loaderState = useSelector((state) => loaderSelector(state));
+  const modal = useSelector(modalSelector);
+  const loaderState = useSelector(loaderSelector);
 
   useEffect(() => {
     const { token } = data;

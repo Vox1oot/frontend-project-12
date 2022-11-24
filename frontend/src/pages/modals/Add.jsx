@@ -16,8 +16,8 @@ import toastSuccess from '../toasts/index.js';
 
 const Add = () => {
   const { t } = useTranslation();
-  const channels = useSelector((state) => channelsSelector(state));
-  const { isShowing } = useSelector((state) => modalSelector(state));
+  const channels = useSelector(channelsSelector);
+  const { isShowing } = useSelector(modalSelector);
   const { addNewChannel } = useSocketContext();
   const dispatch = useDispatch();
   const input = useRef();

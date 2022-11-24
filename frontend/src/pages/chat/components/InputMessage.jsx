@@ -11,7 +11,7 @@ const InputMessage = () => {
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const [isSend, setSend] = useState(false);
-  const channelId = useSelector((state) => channelIdSelector(state));
+  const channelId = useSelector(channelIdSelector);
   const { addNewMessage } = useSocketContext();
   const useAuth = useAuthContext();
   const input = useRef();

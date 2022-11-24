@@ -17,8 +17,8 @@ import unlockElementWithDelay from '../../utils/unlockElementWithDelay.js';
 
 const Rename = () => {
   const { t } = useTranslation();
-  const channels = useSelector((state) => channelsSelector(state));
-  const { isShowing, payload } = useSelector((state) => modalSelector(state));
+  const channels = useSelector(channelsSelector);
+  const { isShowing, payload } = useSelector(modalSelector);
   const { renameChannelName } = useSocketContext();
   const dispatch = useDispatch();
   const input = useRef();

@@ -12,7 +12,7 @@ const Remove = () => {
   const { t } = useTranslation();
   const [isSubmitting, setSubmitting] = useState(false);
   const { removeChannel } = useSocketContext();
-  const { isShowing, payload } = useSelector((state) => modalSelector(state));
+  const { isShowing, payload } = useSelector(modalSelector);
   const dispatch = useDispatch();
 
   const deleteChannel = () => {

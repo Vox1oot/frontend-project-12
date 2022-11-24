@@ -5,8 +5,8 @@ import { messagesSelector } from '../../../redux/slices/messagesSlice.js';
 import { channelIdSelector } from '../../../redux/slices/channelsSlice.js';
 
 const Messages = () => {
-  const currentChannelID = useSelector((state) => channelIdSelector(state));
-  const messages = useSelector((state) => messagesSelector(state));
+  const currentChannelID = useSelector(channelIdSelector);
+  const messages = useSelector(messagesSelector);
 
   useEffect(() => {
     const messagesBox = document.getElementById('messages-box');

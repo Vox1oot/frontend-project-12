@@ -2,12 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { channelsSelector, channelIdSelector } from '../../../redux/slices/channelsSlice.js';
+import { messagesSelector } from '../../../redux/slices/messagesSlice.js';
 
 const ChatInfo = () => {
   const { t } = useTranslation();
-  const channels = useSelector((state) => channelsSelector(state));
-  const currentChannelId = useSelector((state) => channelIdSelector(state));
-  const messages = useSelector((state) => state.messages);
+  const channels = useSelector(channelsSelector);
+  const currentChannelId = useSelector(channelIdSelector);
+  const messages = useSelector(messagesSelector);
   const channel = channels.find(({ id }) => id === currentChannelId);
 
   const countMessages = messages.filter(({ channelId }) => channelId === currentChannelId).length;

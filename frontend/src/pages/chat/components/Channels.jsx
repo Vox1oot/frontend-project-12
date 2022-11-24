@@ -7,8 +7,8 @@ import DeleteChannel from './DeleteChannel.jsx';
 import RenameChannel from './RenameChannel.jsx';
 
 const Channels = () => {
-  const channels = useSelector((state) => channelsSelector(state));
-  const currentChannelId = useSelector((state) => channelIdSelector(state));
+  const channels = useSelector(channelsSelector);
+  const currentChannelId = useSelector(channelIdSelector);
   const dispatch = useDispatch();
 
   const handleActiveChannel = (e) => {
