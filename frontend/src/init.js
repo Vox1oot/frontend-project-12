@@ -26,7 +26,6 @@ const runApp = () => {
   });
 
   socket.on('newChannel', (payload) => {
-    console.log(payload);
     store.dispatch(addChannel(payload));
   });
 

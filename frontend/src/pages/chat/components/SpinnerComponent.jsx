@@ -2,7 +2,7 @@ import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
 
-const Loader = () => {
+const SpinnerComponent = () => {
   const { t } = useTranslation();
 
   return (
@@ -19,4 +19,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default SpinnerComponent;
