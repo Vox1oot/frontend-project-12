@@ -4,6 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec2a57086219a4a7ec76/maintainability)](https://codeclimate.com/github/Vox1oot/frontend-project-12/maintainability)
 
 ### Go to app -> [Chat (Slack)](https://frontend-project-12-production-3657.up.railway.app/)
+#### Default login & password: admin
 
 ### Installation Guide:
 
